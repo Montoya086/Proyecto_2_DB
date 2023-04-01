@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+:root {
+  --primary: #8be2ed;
+  --secondary1: #c9eef3;
+  --secondary: #6d15df;
+}
+h1,h2,h3 {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  color: #333;
+  font-family: 'Poppins';
+  background: #f2f2f2;
+}
+nav {
+  background: var(--primary);
+  padding: 10px 20px;
+  text-align: center;
+}
+nav a {
+  color: #f2f2f2;
+  margin: 10px;
+  display: inline-block;
+}
+nav h1 {
+  color: #fff;
+}
+.page {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_area{
+  width: 300px;
+  height: 250px;
+  margin-top: 10%;
+  left: 50%;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #333;
+  background-color: var(--primary);
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: var(--primary);
+  
+
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+
+		&:focus {
+		  z-index: 2;
+		}
+	}
+
+	input[type="mail"] {
+	  margin-bottom: -1px;
+    width: fit-content;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+    background-color: var(--secondary1);
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+    width: fit-content;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+    background-color: var(--secondary1);
+	}
+
+  button{
+    width: 95%;
+    height: 40px;
+    border-radius: 10px;
+  }
+}
+
+

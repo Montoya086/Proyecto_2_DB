@@ -1,9 +1,6 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-// pages
-import Home from "./pages/Home"
-import Create from "./pages/Create"
-import Update from "./pages/Update"
+import Home from "./pages/Home";
 import Login from "./pages/Login"
 
 
@@ -12,6 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
     /*<BrowserRouter>
