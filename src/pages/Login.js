@@ -1,17 +1,37 @@
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-
+import { useState} from 'react';
+import { createSearchParams, useNavigate } from "react-router-dom";
+import supabase from "../config/supabaseClient";
 
 const Login = () => {
     const [mail, setMail] = useState('');
     const [password, setPasword] = useState('');
     const navigate = useNavigate(); 
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
-        console.log(mail);
-        console.log(password);
-        navigate('/home');
+
+        const {data,error}=await supabase
+        .rpc('users',{mail:mail})
+        if(error){
+            console.log(error)
+        }
+        if(data){
+            if(data[0]){
+                if(data[0].password===password){
+                    navigate({
+                        pathname: '/home',
+                        search: createSearchParams({
+                            id: data[0].id
+                        }).toString()
+                    });
+                }else{
+                    alert('Credenciales incorrectas')
+                }
+            }else{
+                alert('Credenciales incorrectas')
+            }
+        }
+
     };
 
     return (
