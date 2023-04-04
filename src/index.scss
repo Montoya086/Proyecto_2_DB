@@ -107,3 +107,19 @@ nav h1 {
   margin: 0 auto;
   background-color: var(--primary);
 }
+
+.search{
+  justify-content: center;
+  display: flex;
+}
+
+.search-input{
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.search-button{
+  height: 35px;
+  border-radius: 10px;
+}
