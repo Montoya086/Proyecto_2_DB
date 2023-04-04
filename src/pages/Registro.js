@@ -51,8 +51,8 @@ const Registro = () => {
       </div>
       <div className="body">
         <form className="form-registro">
-          <h2 className='login_title'>Login</h2>
-          
+          <h2 className='login_title'>Registro</h2>
+          <label></label>
         </form>
       </div>
     </div>
