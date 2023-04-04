@@ -3,7 +3,7 @@ import { useEffect,useState } from "react"
 import { useSearchParams, createSearchParams } from "react-router-dom"
 import { BrowserRouter, Link } from "react-router-dom"
 
-const Home = () => {
+const Registro = () => {
   const[fetchError, setFetchError]=useState(null)
   const[test, setTest]=useState(null)
   const[rol, setRol]=useState(null)
@@ -35,11 +35,10 @@ const Home = () => {
   },[user_id])
 
   return (
-    <div className="page home">
+    <div className="page registro">
       <div className="header">
         <nav>
-          <h1>Pagina inicial</h1>
-          {test&&(<h6>Bienvenido {test[0].nombre}</h6>)}
+          <h1>Registo de Médicos</h1>
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
           <Link to="/">Logout</Link>
           {test&&rol&&(
@@ -51,10 +50,13 @@ const Home = () => {
         </nav>
       </div>
       <div className="body">
-
+        <form className="form-registro">
+          <h2 className='login_title'>Login</h2>
+          
+        </form>
       </div>
     </div>
   )
 }
 
-export default Home
+export default Registro

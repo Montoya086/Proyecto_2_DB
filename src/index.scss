@@ -5,7 +5,7 @@
   --secondary1: #c9eef3;
   --secondary: #6d15df;
 }
-h1,h2,h3 {
+h1,h2,h3,h6 {
   margin: 0;
 }
 
@@ -17,16 +17,21 @@ body {
 }
 nav {
   background: var(--primary);
-  padding: 10px 20px;
+  padding: 20px;
   text-align: center;
 }
 nav a {
-  color: #f2f2f2;
-  margin: 10px;
+  color: #333;
+  text-decoration: none;
+  padding: 14px 25px;
   display: inline-block;
 }
+nav a:hover {
+  color: var(--secondary);
+  background-color: var(--secondary1);
+}
 nav h1 {
-  color: #fff;
+  color: #333;
 }
 .page {
   max-width: 1200px;
@@ -92,4 +97,13 @@ nav h1 {
   }
 }
 
-
+.body{
+  margin: 30px;
+}
+.form-registro{
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: var(--primary);
+}
