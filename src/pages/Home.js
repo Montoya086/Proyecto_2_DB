@@ -74,9 +74,13 @@ const Home = () => {
             <button className='search-button' type='submit'>Buscar</button>
           </form>
         </div>
-        <div id='result'>
+        <div className='result-div'>
           {patient&&(
-            <p></p>
+            <div className='result-area'>
+              <div className='result-text'>
+                <h2>Información de paciente</h2>
+              </div>
+            </div>
           )}
         </div>
       </div>

@@ -123,3 +123,18 @@ nav h1 {
   height: 35px;
   border-radius: 10px;
 }
+
+.result-div{
+  justify-content: center;
+  display: flex;
+  .result-area{
+    width: 600px;
+    background-color: var(--secondary1);
+    margin: 50px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #333;
+    .result-text{
+      margin: 15px;
+    }
+  }
+}
