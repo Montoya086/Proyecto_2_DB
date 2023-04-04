@@ -5,7 +5,7 @@
   --secondary1: #c9eef3;
   --secondary: #6d15df;
 }
-h1,h2,h3,h6 {
+h1,h2,h3,h6,h5,h4,p {
   margin: 0;
 }
 
@@ -135,6 +135,13 @@ nav h1 {
     box-shadow: 5px 5px 10px #333;
     .result-text{
       margin: 15px;
+      h2{
+        margin-bottom: 10px;
+        text-decoration: underline;
+      }
+      .subtitle{
+        font-style: oblique;
+      }
     }
   }
 }

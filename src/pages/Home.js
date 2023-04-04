@@ -75,10 +75,91 @@ const Home = () => {
           </form>
         </div>
         <div className='result-div'>
-          {patient&&(
+          {patient[0]&&(
             <div className='result-area'>
               <div className='result-text'>
                 <h2>Información de paciente</h2>
+                <h5>Nombre:</h5>
+                <p>{patient[0].nombre_paciente}</p>
+                <h5>Índice de masa corporal:</h5>
+                <p>{patient[0].ind_masa_paciente}</p>
+                <h5>Altura (m):</h5>
+                <p>{patient[0].altura}</p>
+                <h5>Peso (Lb):</h5>
+                <p>{patient[0].peso}</p>
+                <h5>Adicciones:</h5>
+                {!patient[0].adicciones&&(
+                  <p>No</p>
+                )}
+                {patient[0].adicciones&&(
+                  <p>Sí</p>
+                )}
+                <h5>Dirección:</h5>
+                <p>{patient[0].direccion_paciente}</p>
+                <h5>Teléfono:</h5>
+                <p>{patient[0].telefono_paciente}</p>
+                <h3>Intervenciones:</h3>
+                {patient.map(inter=>(
+                  <>
+                    <h4 className="subtitle">Información del médico</h4>
+                    <h5>Nombre:</h5>
+                    <p>{inter.nombre_medico}</p>
+                    <h5>No. Colegiado:</h5>
+                    <p>{inter.num_colegiado}</p>
+                    <h5>Teléfono:</h5>
+                    <p>{inter.telefono}</p>
+                    <h5>Especialidad:</h5>
+                    <p>{inter.especialidad}</p>
+                    <h4 className="subtitle">Información de intervención</h4>
+                    <h5>Lugar de realización:</h5>
+                    <p>{inter.nombre_establecimiento}</p>
+                    <h5>Dirección:</h5>
+                    <p>{inter.direccion_establecimiento}</p>
+                    <h5>Status:</h5>
+                    <p>{inter.status}</p>
+                    {inter.nombre_enfermedad&&(
+                      <>
+                        <h5>Descripción de diagnóstico:</h5>
+                        <p>{inter.descripcion_diagnostico}</p>
+                        <h5>Enfermedad:</h5>
+                        <p>{inter.nombre_enfermedad}</p>
+                        <h5>Descripción de enfermedad:</h5>
+                        <p>{inter.descripcion_enfermedad}</p>
+                        <h5>Precedentes:</h5>
+                        <p>{inter.precedentes}</p>
+                      </>
+                    )}
+                    {inter.nombre_insumo&&(
+                      <>
+                        <h5>Insumo utilizado:</h5>
+                        <p>{inter.nombre_insumo}</p>
+                        <h5>Cantidad utilizada:</h5>
+                        <p>{inter.cantidad}</p>
+                      </>
+                    )}
+                    {inter.nombre_examen&&(
+                      <>
+                        <h5>Descripción de resultado:</h5>
+                        <p>{inter.descripcion_resultado}</p>
+                        <h5>Examen:</h5>
+                        <p>{inter.nombre_examen}</p>
+                        <h5>Descripción de examen:</h5>
+                        <p>{inter.descripcion_examen}</p>
+                      </>
+                    )}
+                    {inter.nombre_cirugia&&(
+                      <>
+                        <h5>Descripción de realización de cirugía:</h5>
+                        <p>{inter.descripcion_realizacion}</p>
+                        <h5>Cirugía:</h5>
+                        <p>{inter.nombre_cirugia}</p>
+                        <h5>Descripción de cirugia:</h5>
+                        <p>{inter.descripcion_cirugia}</p>
+                      </>
+                    )}
+                    <hr/>
+                  </>
+                ))}
               </div>
             </div>
           )}
