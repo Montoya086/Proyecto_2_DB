@@ -20,13 +20,7 @@ nav {
   padding: 20px;
   text-align: center;
 }
-.title-holder{
-  display: flex;
-  .logo-image{
-    width: 40px;
-    height: 40px;
-  }
-}
+
 nav a {
   color: #333;
   text-decoration: none;
@@ -63,6 +57,14 @@ nav h1 {
   border-radius: 10px;
   margin: 0 auto;
   background-color: var(--secondary1);
+  box-shadow: 5px 5px 10px #333;
+  .title-holder{
+    display: flex;
+    .logo-image{
+      width: 40px;
+      height: 40px;
+    }
+  }
   .text-box{
     position: relative;
     margin-top: 15px;
