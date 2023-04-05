@@ -1,6 +1,7 @@
 import { useState} from 'react';
 import { createSearchParams, useNavigate } from "react-router-dom";
 import supabase from "../config/supabaseClient";
+import logo from '../images/logo.png';
 
 const Login = () => {
     const [mail, setMail] = useState('');
@@ -38,13 +39,18 @@ const Login = () => {
         <div className="container">
             <div className="login_area">
                 <form className="form-signin" onSubmit={handleSubmit}>
-                    <h2 className='login_title'>Login</h2>
-                    <label>
-                        <input className='form-control' placeholder='user@example.com' type="mail" value={mail} onChange={(e) => setMail(e.target.value)}/>
-                    </label>
-                    <label>
-                        <input className='form-control' placeholder='password' type="password" value={password} onChange={(e) => setPasword(e.target.value)}/>
-                    </label>
+                    <div className='title-holder'>
+                        <h2 className='login_title'>Login</h2>
+                        <img src={logo} className='logo-image'/>
+                    </div>
+                    <div className='text-box'>
+                        <input required type="mail" value={mail} onChange={(e) => setMail(e.target.value)}/>
+                        <label>Correo Electrónico</label>
+                    </div>
+                    <div className='text-box'>
+                        <input required type="password" value={password} onChange={(e) => setPasword(e.target.value)}/>
+                        <label>Contraseña</label>
+                    </div>
                     <br/>
                     <button className='btn btn-lg btn-primary btn-block' type='submit'>Login</button>
                 </form>

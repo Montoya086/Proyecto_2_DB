@@ -20,6 +20,13 @@ nav {
   padding: 20px;
   text-align: center;
 }
+.title-holder{
+  display: flex;
+  .logo-image{
+    width: 40px;
+    height: 40px;
+  }
+}
 nav a {
   color: #333;
   text-decoration: none;
@@ -46,54 +53,56 @@ nav h1 {
 }
 
 .login_area{
-  width: 300px;
-  height: 250px;
   margin-top: 10%;
   left: 50%;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px #333;
-  background-color: var(--primary);
 }
 
-.form-signin {
+.form-signin{
   max-width: 380px;
   padding: 15px 35px 45px;
   border-radius: 10px;
   margin: 0 auto;
-  background-color: var(--primary);
-  
-
-	.form-control {
-	  position: relative;
-	  font-size: 16px;
-	  height: auto;
-	  padding: 10px;
-
-		&:focus {
-		  z-index: 2;
-		}
-	}
-
-	input[type="mail"] {
-	  margin-bottom: -1px;
-    width: fit-content;
-	  border-bottom-left-radius: 0;
-	  border-bottom-right-radius: 0;
-    background-color: var(--secondary1);
-	}
-
-	input[type="password"] {
-	  margin-bottom: 20px;
-    width: fit-content;
-	  border-top-left-radius: 0;
-	  border-top-right-radius: 0;
-    background-color: var(--secondary1);
-	}
-
+  background-color: var(--secondary1);
+  .text-box{
+    position: relative;
+    margin-top: 15px;
+  }
+  .text-box input{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #333;
+    outline: none;
+    background: transparent;
+  }
+  .text-box label{
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    pointer-events: none;
+    transition: .5s;
+  }
+  .text-box input:focus ~ label,
+  .text-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: var(--secondary);
+    font-size: 12px;
+  }
   button{
-    width: 95%;
-    height: 40px;
+    width: 100%;
+    height: 30px;
+    background-color: var(--primary);
     border-radius: 10px;
+  }
+  button:hover{
+    box-shadow: 2px 2px 10px #333;
   }
 }
 
@@ -139,6 +148,7 @@ nav h1 {
     font-size: 12px;
   }
 }
+
 
 .search{
   justify-content: center;
