@@ -85,12 +85,11 @@ const Registro = () => {
     })
     if(error){
       console.log(error)
-    }
-    if(data){
+    }else{
       alert("Ingresado correctamente")
     }
 
-    //window.location.reload(true)
+    window.location.reload(true)
   }
   return (
     <div className="page registro">
