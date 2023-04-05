@@ -8,10 +8,11 @@ const Registro = () => {
   const[test, setTest]=useState(null)
   const[estab, setEstab]=useState(null)
   const[rol, setRol]=useState(null)
+  const[sesion, setSesion]=useState('')
 
   const [searchparams] = useSearchParams();
   const [user_id] = useState(searchparams.get('id'));
-
+  //fetch user data
   useEffect(()=>{
     const fetchTest= async ()=>{
       const {data,error}=await supabase
@@ -25,6 +26,7 @@ const Registro = () => {
         if(data){
           setTest(data)
           setFetchError(null)
+          setSesion(data[0].user_mail)
           if(data[0].user_rol==='admin'){
             setRol(true)
           }
@@ -34,6 +36,7 @@ const Registro = () => {
     fetchTest()
   },[user_id])
 
+  //fetch establecimientos
   useEffect(()=>{
     const fetchTest= async ()=>{
       const {data,error}=await supabase
@@ -45,7 +48,6 @@ const Registro = () => {
         console.log(error)
       }
       if(data){
-        console.log(data)
         setEstab(data)
         setFetchError(null)
       }
@@ -62,12 +64,34 @@ const Registro = () => {
   const[especialidad_r, setEspecialidad_r]=useState('')
   const[mail_r, setMail_r]=useState('')
   const[password_r, setPassword_r]=useState('')
+  const[estab_r, setEstab_r]=useState('')
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
 
-  }
+    const {data,error}=await supabase
+    .rpc('set_medico',{
+      name_r:name_r,
+      dni_r:dni_r,
+      telefono_r:telefono_r,
+      direccion_r:direccion_r,
+      ncolegiado_r:ncolegiado_r,
+      especialidad_r:especialidad_r,
+      mail_r:mail_r,
+      password_r:password_r,
+      estab_r:estab_r,
+      log_mail:sesion,
+      log_info:"Se ingresó el médico "+name_r
+    })
+    if(error){
+      console.log(error)
+    }
+    if(data){
+      alert("Ingresado correctamente")
+    }
 
+    //window.location.reload(true)
+  }
   return (
     <div className="page registro">
       <div className="header">
@@ -111,12 +135,17 @@ const Registro = () => {
             <label>Especialidad</label>
           </div>
           <div className="select-box">
-            <select name="Establecimientos">
-              {estab.map(e=>(
+            <select name="Establecimientos" required value={estab_r} onChange={(e) => setEstab_r(e.target.value)}>
+              {estab&&(
                 <>
-                  <option>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
+                  {estab.map(e=>(
+                    <>
+                      <option value="">Seleccione un Establecimiento</option>
+                      <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
+                    </>
+                  ))}
                 </>
-              ))}
+              )}
             </select>
           </div>
           <h3>Datos de usuario</h3>
@@ -127,6 +156,9 @@ const Registro = () => {
           <div className="text-box">
             <input type="password" required value={password_r} onChange={(e) => setPassword_r(e.target.value)} />
             <label>Contraseña</label>
+          </div>
+          <div className="submit-button">
+            <button className='btn' type='submit'>Registrar</button>
           </div>
         </form>
       </div>
