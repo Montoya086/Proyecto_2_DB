@@ -105,7 +105,38 @@ nav h1 {
   padding: 15px 35px 45px;
   border-radius: 10px;
   margin: 0 auto;
-  background-color: var(--primary);
+  background-color: var(--secondary1);
+  .text-box{
+    position: relative;
+    margin-top: 15px;
+  }
+  .text-box input{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #333;
+    outline: none;
+    background: transparent;
+  }
+  .text-box label{
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    pointer-events: none;
+    transition: .5s;
+  }
+  .text-box input:focus ~ label {
+    top: -20px;
+    left: 0;
+    color: var(--secondary);
+    font-size: 12px;
+  }
 }
 
 .search{
