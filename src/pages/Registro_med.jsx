@@ -96,17 +96,23 @@ const Registro = () => {
   return (
     <div className="page registro">
       <div className="header">
-        <nav>
-          <h1>Registo de Médicos</h1>
+      <nav>
+          <h1>Página principal</h1>
+          {/*Public paths*/}
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
+          <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
+          <Link to={{pathname:'/registro_paciente',search: createSearchParams({id: user_id}).toString()}}>Registro de paciente</Link>
+          <Link to={{pathname:'/ingreso_paciente',search: createSearchParams({id: user_id}).toString()}}>Ingreso de paciente</Link>
+          <Link to={{pathname:'/inventario',search: createSearchParams({id: user_id}).toString()}}>Inventario</Link>
+          <Link to={{pathname:'/act_datos',search: createSearchParams({id: user_id}).toString()}}>Act. de datos</Link>
+          {/*Private paths*/}
           {test&&rol&&(
             <>
-              <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro</Link>
-              <Link to="/">Reportes</Link>
+              <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro de médicos</Link>
               <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
             </>
           )}
-          <Link to="/">Logout</Link>
+          <Link to="/" className="logout">Logout</Link>
         </nav>
       </div>
       <div className="body">

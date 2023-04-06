@@ -50,12 +50,11 @@ const Registro = () => {
           {/*Private paths*/}
           {fecthData&&rol&&(
             <>
-              <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro</Link>
-              <Link to="/">Reportes</Link>
+              <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro de médicos</Link>
               <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
             </>
           )}
-          <Link to="/">Logout</Link>
+          <Link to="/" className="logout">Logout</Link>
         </nav>
       </div>
       <div className="body">
