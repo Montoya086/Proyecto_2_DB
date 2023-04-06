@@ -4,46 +4,57 @@ import { useSearchParams, createSearchParams } from "react-router-dom"
 import { BrowserRouter, Link } from "react-router-dom"
 
 const Home = () => {
+  //get user id
+  const [searchparams] = useSearchParams();
+  const [user_id] = useState(searchparams.get('id'));
+
+  //variables
   const[fetchError, setFetchError]=useState(null)
   const[test, setTest]=useState(null)
   const[rol, setRol]=useState(null)
-
-  const [searchparams] = useSearchParams();
-  const [user_id] = useState(searchparams.get('id'));
   const [dni, setDni] = useState('');
   const [patient, setPatient] = useState('');
 
+  //fetch
   useEffect(()=>{
     const fetchTest= async ()=>{
+      //query returns table medico using user_id
       const {data,error}=await supabase
         .rpc('get_medico_using_user_id',{user_id:user_id})
 
+        //on error
         if(error){
           setFetchError('Could not fetch')
           setTest(null)
           console.log(error)
         }
+        //on data returned
         if(data){
           setTest(data)
           setFetchError(null)
+          //checks if the user has the admin rol
           if(data[0].user_rol==='admin'){
             setRol(true)
           }
         }
 
     }
-
+    //fecth
     fetchTest()
   },[user_id])
 
+  //on submit
   const handleSubmit = async (e) =>{
     e.preventDefault();
 
+    //fetch all the data of paciente in the database
     const {data,error}=await supabase
     .rpc('get_info_from_paciente_with_dni',{p_dni:dni})
+    //on error
     if(error){
       console.log(error)
     }
+    //on data returned
     if(data){
       setPatient(data)
     }
@@ -52,20 +63,25 @@ const Home = () => {
   return (
     <div className="page home">
       <div className="header">
+        {/*Navigation bar*/}
         <nav>
           <h1>Pagina inicial</h1>
           {test&&(<h6>Bienvenido {test[0].nombre}</h6>)}
+          {/*Public paths*/}
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
-          <Link to="/">Logout</Link>
+          {/*Private paths*/}
           {test&&rol&&(
             <>
               <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro</Link>
               <Link to="/">Reportes</Link>
+              <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
             </>
           )}
+          <Link to="/">Logout</Link>
         </nav>
       </div>
       <div className="body">
+        {/*Search paciente form*/}
         <div className="search">
           <form onSubmit={handleSubmit}>
             <h2>Buscar paciente</h2>
@@ -73,6 +89,7 @@ const Home = () => {
             <button className='search-button' type='submit'>Buscar</button>
           </form>
         </div>
+        {/*Info about paciente*/}
         <div className='result-div'>
           {patient[0]&&(
             <div className='result-area'>

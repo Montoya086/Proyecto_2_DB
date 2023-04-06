@@ -4,14 +4,16 @@ import { useSearchParams, createSearchParams } from "react-router-dom"
 import { BrowserRouter, Link } from "react-router-dom"
 
 const Registro = () => {
+  //get user_id
+  const [searchparams] = useSearchParams();
+  const [user_id] = useState(searchparams.get('id'));
+
   const[fetchError, setFetchError]=useState(null)
   const[test, setTest]=useState(null)
   const[estab, setEstab]=useState(null)
   const[rol, setRol]=useState(null)
   const[sesion, setSesion]=useState('')
 
-  const [searchparams] = useSearchParams();
-  const [user_id] = useState(searchparams.get('id'));
   //fetch user data
   useEffect(()=>{
     const fetchTest= async ()=>{
@@ -97,13 +99,14 @@ const Registro = () => {
         <nav>
           <h1>Registo de Médicos</h1>
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
-          <Link to="/">Logout</Link>
           {test&&rol&&(
             <>
               <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro</Link>
               <Link to="/">Reportes</Link>
+              <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
             </>
           )}
+          <Link to="/">Logout</Link>
         </nav>
       </div>
       <div className="body">
