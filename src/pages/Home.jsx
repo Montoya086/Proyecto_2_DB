@@ -1,7 +1,7 @@
 import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
 import { useSearchParams, createSearchParams } from "react-router-dom"
-import { BrowserRouter, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Home = () => {
   //get user id
@@ -26,7 +26,7 @@ const Home = () => {
         if(error){
           setFetchError('Could not fetch')
           setTest(null)
-          console.log(error)
+          console.log(fetchError)
         }
         //on data returned
         if(data){
@@ -41,7 +41,7 @@ const Home = () => {
     }
     //fecth
     fetchTest()
-  },[user_id])
+  },[user_id,fetchError])
 
   //on submit
   const handleSubmit = async (e) =>{

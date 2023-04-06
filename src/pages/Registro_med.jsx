@@ -1,7 +1,7 @@
 import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
 import { useSearchParams, createSearchParams } from "react-router-dom"
-import { BrowserRouter, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Registro = () => {
   //get user_id
@@ -23,7 +23,7 @@ const Registro = () => {
         if(error){
           setFetchError('Could not fetch')
           setTest(null)
-          console.log(error)
+          console.log(fetchError)
         }
         if(data){
           setTest(data)
@@ -36,7 +36,7 @@ const Registro = () => {
 
     }
     fetchTest()
-  },[user_id])
+  },[user_id,fetchError])
 
   //fetch establecimientos
   useEffect(()=>{
@@ -87,7 +87,8 @@ const Registro = () => {
     })
     if(error){
       console.log(error)
-    }else{
+    }
+    if(data){
       alert("Ingresado correctamente")
     }
 
