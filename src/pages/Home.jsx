@@ -65,10 +65,15 @@ const Home = () => {
       <div className="header">
         {/*Navigation bar*/}
         <nav>
-          <h1>Pagina inicial</h1>
+          <h1>Página principal</h1>
           {test&&(<h6>Bienvenido {test[0].nombre}</h6>)}
           {/*Public paths*/}
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
+          <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
+          <Link to={{pathname:'/registro_paciente',search: createSearchParams({id: user_id}).toString()}}>Registro de paciente</Link>
+          <Link to={{pathname:'/ingreso_paciente',search: createSearchParams({id: user_id}).toString()}}>Ingreso de paciente</Link>
+          <Link to={{pathname:'/inventario',search: createSearchParams({id: user_id}).toString()}}>Inventario</Link>
+          <Link to={{pathname:'/act_datos',search: createSearchParams({id: user_id}).toString()}}>Act. de datos</Link>
           {/*Private paths*/}
           {test&&rol&&(
             <>
