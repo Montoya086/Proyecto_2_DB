@@ -50,15 +50,16 @@ const RegistroPaciente = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
 
+    var fecha_nac_p_date = new Date(fecha_nac_p);
     const {data,error}=await supabase
     .rpc('set_paciente',{
       dni_p:dni_p,
       name_p:name_p,
-      ind_masa_p:ind_masa_p,
-      altura_p:altura_p,
-      peso_p:peso_p,
+      ind_masa_p:parseFloat(ind_masa_p),
+      altura_p:parseFloat(altura_p),
+      peso_p:parseFloat(peso_p),
       addicciones_p:addicciones_p,
-      fecha_nac_p:fecha_nac_p,
+      fecha_nac_p:fecha_nac_p_date,
       sexo_p:sexo_p,
       telefono_p:telefono_p,
       direccion_p:direccion_p,
@@ -68,12 +69,23 @@ const RegistroPaciente = () => {
 
     if(error){
       console.log(error)
+    }else{
+      alert("Ingresado correctamente")
+      setDni_p('')
+      setName_p('')
+      setInd_masa_p('')
+      setAltura_p('')
+      setPeso_p('')
+      setAddicciones_p('')
+      setFecha_nac_p('')
+      setSexo_p('')
+      setTelefono_p('')
+      setDireccion_p('')
     }
     if(data){
-      alert("Ingresado correctamente")
+      //alert("Ingresado correctamente")
     }
-
-    window.location.reload(true)
+  
   }
 
   return (
@@ -102,7 +114,7 @@ const RegistroPaciente = () => {
         <form className="form-registro" onSubmit={handleSubmit}>
           <h2 className='login_title'>Registro de paciente</h2>
           <div className="text-box">
-            <input type="text" required value={dni_p} onChange={(e) => setDni_p(e.target.value)} />
+            <input type="text" required value={dni_p} onChange={(e) => setDni_p(e.target.value)}/>
             <label>DNI</label>
           </div>
           <div className="text-box">
@@ -122,7 +134,8 @@ const RegistroPaciente = () => {
             <label>Peso</label>
           </div>
           <div className="select-box">
-            <select value={addicciones_p} onChange={(e) => setAddicciones_p(e.target.value)}>
+            <select value={addicciones_p} required onChange={(e) => setAddicciones_p(e.target.value)}>
+              <option value="">Seleccione una opción</option>
               <option value="No">No</option>
               <option value="Si">Si</option>
             </select>
@@ -132,7 +145,8 @@ const RegistroPaciente = () => {
             <input type="date" required value={fecha_nac_p} onChange={(e) => setFecha_nac_p(e.target.value)} />
           </div>
           <div className="select-box">
-            <select value={sexo_p} onChange={(e) => setSexo_p(e.target.value)}>
+            <select value={sexo_p} required onChange={(e) => setSexo_p(e.target.value)}>
+              <option value="">Seleccione una opción</option>
               <option value="M">Masculino</option>
               <option value="F">Femenino</option>
             </select>
