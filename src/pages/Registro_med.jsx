@@ -87,12 +87,22 @@ const Registro = () => {
     })
     if(error){
       console.log(error)
+    }else{
+      alert("Ingresado correctamente")
+      setName_r('')
+      setDni_r('')
+      setTelefono_r('')
+      setDireccion_r('')
+      setNcolegiado_r('')
+      setEspecialidad_r('')
+      setMail_r('')
+      setPassword_r('')
+      setEstab_r('')
     }
     if(data){
-      alert("Ingresado correctamente")
+      //alert("Ingresado correctamente")
     }
 
-    window.location.reload(true)
   }
   return (
     <div className="page registro">
