@@ -65,6 +65,7 @@ const RegistroPaciente = () => {
       log_mail:sesion,
       log_info:"Se ingresó el paciente "+name_p+" con el DNI "+dni_p
     })
+
     if(error){
       console.log(error)
     }
@@ -128,8 +129,7 @@ const RegistroPaciente = () => {
             <label>Adicciones</label>
           </div>
           <div className="text-box">
-            <input type="text" required value={fecha_nac_p} onChange={(e) => setFecha_nac_p(e.target.value)} />
-            <label>Fecha de nacimiento</label>
+            <input type="date" required value={fecha_nac_p} onChange={(e) => setFecha_nac_p(e.target.value)} />
           </div>
           <div className="select-box">
             <select value={sexo_p} onChange={(e) => setSexo_p(e.target.value)}>
