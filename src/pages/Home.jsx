@@ -101,6 +101,8 @@ const Home = () => {
                 <h2>Información de paciente</h2>
                 <h5>Nombre:</h5>
                 <p>{patient[0].nombre_paciente}</p>
+                <h5>Fecha de Nacimiento:</h5>
+                <p>{patient[0].fecha_nac}</p>
                 <h5>Índice de masa corporal:</h5>
                 <p>{patient[0].ind_masa_paciente}</p>
                 <h5>Altura (m):</h5>
