@@ -19,6 +19,9 @@ const Inventario = () => {
   const[cant_ins, setCant_ins]=useState('')
   const [estabSelected, setEstabSelected]=useState('')
   const [dataInsumos, setDataInsumos] = useState(null)
+  const [isRegistro, setIsRegistro]=useState(false)
+  const [isIngreso, setIsIngreso]=useState(false)
+  const [isLista, setIsLista]=useState(true)
 
   useEffect(()=>{
     const fetchTest= async ()=>{
@@ -81,7 +84,7 @@ const Inventario = () => {
 
     }
     fetchTest()
-  },[])
+  },[isIngreso,isLista,isRegistro])
 
   
   //registro de insumo
@@ -170,13 +173,12 @@ const Inventario = () => {
   
   }
 
-  const [isRegistro, setIsRegistro]=useState(false)
-  const [isIngreso, setIsIngreso]=useState(false)
-  const [isLista, setIsLista]=useState(true)
   const handleRadio1 =(e)=>{
     setIsRegistro(true)
     setIsIngreso(false)
     setIsLista(false)
+    setEstabSelected('')
+    setDataInsumos(null)
   }
   const handleRadio2 =(e)=>{
     setIsRegistro(false)
