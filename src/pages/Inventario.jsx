@@ -56,7 +56,26 @@ const Inventario = () => {
     fetchTest()
   },[])
 
-  
+  const [listaInsumos, setListaInsumos] = useState(null)
+  //fetch insumos
+  useEffect(()=>{
+    const fetchTest= async ()=>{
+      const {data,error}=await supabase
+      .rpc('get_insumos')
+
+      if(error){
+        setFetchError('Could not fetch')
+        setListaInsumos(null)
+        console.log(error)
+      }
+      if(data){
+        setListaInsumos(data)
+        setFetchError(null)
+      }
+
+    }
+    fetchTest()
+  },[])
 
   const[nombre, setNombre]=useState('')
   const[estab_ins, setEstab_ins]=useState('')
@@ -83,28 +102,66 @@ const Inventario = () => {
     }
   
   }
+
+  const [insumoIngreso, setInsumoIngreso] =useState('')
   //ingreso de insumo
   const handleSubmit2 = async (e) =>{
     e.preventDefault();
 
-    /*const {data,error}=await supabase
-    .rpc('set_insumo',{
-      id_ins:id_ins,
-      estab_ins:estab_ins,
-      cant_ins:cant_ins,
-      log_mail:sesion,
-      log_info:"Se ingresó el insumo "+id_ins+" al establecimiento "+estab_ins+" con la cantidad "+cant_ins
+    const {data,error}=await supabase
+    .rpc('get_number_insumo_estab',{
+      id_estab: estab_ins,
+      id_insumo: insumoIngreso
     })
 
     if(error){
       console.log(error)
     }else{
-      setId_ins('')
-      setNombre('')
+      //si se ha registrado el insumo
+      var new_cant=parseInt(cant_ins)+parseInt(data[0].cantidad)
+      if(data[0]){
+        const {data,error}=await supabase
+        .rpc('set_insumo_estab',{
+          id_estab: estab_ins,
+          id_insumo: insumoIngreso,
+          cantidad_ins: new_cant,
+          log_mail:sesion,
+          log_info:"Se agregaron "+cant_ins+" unidades del insumo con ID:"+insumoIngreso+", al establecimiento con ID:"+estab_ins
+        })
+        if(error){
+          console.log(error)
+        }else{
+          setEstab_ins('')
+          setInsumoIngreso('')
+          setCant_ins('')
+          alert("Cantidad agregada correctamente")
+        }
+        if(data){
+
+        }
+      }//no se ha registrado el insumo
+      else{
+        const {data,error}=await supabase
+        .rpc('set_new_insumo_estab',{
+          id_estab: estab_ins,
+          id_insumo: insumoIngreso,
+          cantidad: cant_ins,
+          log_mail:sesion,
+          log_info:"Se ingresó "+cant_ins+" unidades del insumo con ID:"+insumoIngreso+", al establecimiento con ID:"+estab_ins
+        })
+        if(error){
+          console.log(error)
+        }else{
+          setEstab_ins('')
+          setInsumoIngreso('')
+          setCant_ins('')
+          alert("Ingresado correctamente")
+        }
+        if(data){
+
+        }
+      }
     }
-    if(data){
-      //alert("Ingresado correctamente")
-    }*/
   
   }
 
@@ -199,7 +256,7 @@ const Inventario = () => {
             </div>
           </form>
         )}
-
+        {/*Ingreso de insumos */}
         {isIngreso&&(
           <form className="form-registro" onSubmit={handleSubmit2}>
           <h2 className='login_title'>Establecimiento</h2>
@@ -219,6 +276,20 @@ const Inventario = () => {
             </div>
             <br></br>
             <h2 className='login_title'>Ingreso de insumo</h2>
+            <div className="select-box">
+              <select name="Insumos" required value={insumoIngreso} onChange={(e) => setInsumoIngreso(e.target.value)}>
+                {listaInsumos&&(
+                  <>
+                    <option value="">Seleccione un Insumo</option>
+                    {listaInsumos.map(insumo=>(
+                      <>
+                        <option value={insumo.id_insumo}>{insumo.nombre_insumo}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
             <div className="text-box">
               <input type="text" required value={cant_ins} onChange={(e) => setCant_ins(e.target.value)} />
               <label>Cantidad</label>
@@ -228,7 +299,7 @@ const Inventario = () => {
             </div>
           </form>
         )}
-        {/*Despliega la lista de insumos */}
+        {/*Despliega el inventario de insumos */}
         {isLista&&(
           <>
           <form className="estab-selection" onSubmit={handleEstabSelection}>
