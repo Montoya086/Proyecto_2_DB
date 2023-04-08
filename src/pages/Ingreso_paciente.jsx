@@ -176,9 +176,9 @@ const IngresoPaciente = () => {
         console.log(error)
       }
       if(data){
-        setCantInsumo(data)
+        await setCantInsumo(data)
         //si existe la cantidad del insumo
-        if(parseInt(cantInsumo[0].cantidad_insumo)<=parseInt(cantInsumoPaciente)){
+        if(parseInt(cantInsumo[0].cantidad_insumo)>=parseInt(cantInsumoPaciente)){
           const {data,error}=await supabase
           .rpc('set_ingreso_paciente',{
             dni_pac:dniPaciente,
