@@ -12,6 +12,13 @@ const Inventario = () => {
   const[estab, setEstab]=useState(null)
   const[test, setTest]=useState(null)
   const[sesion, setSesion]=useState('')
+  const [insumoIngreso, setInsumoIngreso] =useState('')
+  const [listaInsumos, setListaInsumos] = useState(null)
+  const[nombre, setNombre]=useState('')
+  const[estab_ins, setEstab_ins]=useState('')
+  const[cant_ins, setCant_ins]=useState('')
+  const [estabSelected, setEstabSelected]=useState('')
+  const [dataInsumos, setDataInsumos] = useState(null)
 
   useEffect(()=>{
     const fetchTest= async ()=>{
@@ -56,7 +63,6 @@ const Inventario = () => {
     fetchTest()
   },[])
 
-  const [listaInsumos, setListaInsumos] = useState(null)
   //fetch insumos
   useEffect(()=>{
     const fetchTest= async ()=>{
@@ -77,9 +83,7 @@ const Inventario = () => {
     fetchTest()
   },[])
 
-  const[nombre, setNombre]=useState('')
-  const[estab_ins, setEstab_ins]=useState('')
-  const[cant_ins, setCant_ins]=useState('')
+  
   //registro de insumo
   const handleSubmit = async (e) =>{
     e.preventDefault();
@@ -103,7 +107,6 @@ const Inventario = () => {
   
   }
 
-  const [insumoIngreso, setInsumoIngreso] =useState('')
   //ingreso de insumo
   const handleSubmit2 = async (e) =>{
     e.preventDefault();
@@ -186,8 +189,7 @@ const Inventario = () => {
     setIsLista(true)
   }
 
-  const [estabSelected, setEstabSelected]=useState('')
-  const [dataInsumos, setDataInsumos] = useState(null)
+
 
   const handleEstabSelection = async (e)=>{
     e.preventDefault();
