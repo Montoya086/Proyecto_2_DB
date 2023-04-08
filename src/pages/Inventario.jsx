@@ -56,6 +56,8 @@ const Inventario = () => {
     fetchTest()
   },[])
 
+  
+
   const[id_ins, setId_ins]=useState('')
   const[nombre, setNombre]=useState('')
   const[estab_ins, setEstab_ins]=useState('')
@@ -108,6 +110,42 @@ const Inventario = () => {
   
   }
 
+  const [isRegistro, setIsRegistro]=useState(false)
+  const [isIngreso, setIsIngreso]=useState(false)
+  const [isLista, setIsLista]=useState(true)
+  const handleRadio1 =(e)=>{
+    setIsRegistro(true)
+    setIsIngreso(false)
+    setIsLista(false)
+  }
+  const handleRadio2 =(e)=>{
+    setIsRegistro(false)
+    setIsIngreso(true)
+    setIsLista(false)
+  }
+  const handleRadio3 =(e)=>{
+    setIsRegistro(false)
+    setIsIngreso(false)
+    setIsLista(true)
+  }
+
+  const [estabSelected, setEstabSelected]=useState('')
+  const [dataInsumos, setDataInsumos] = useState(null)
+
+  const handleEstabSelection = async (e)=>{
+    e.preventDefault();
+    const {data,error}=await supabase
+    .rpc('get_inventario',{
+      id_estab:estabSelected
+    })
+    if(error){
+      console.log(error)
+    }
+    if(data){
+      setDataInsumos(data)
+    }
+  }
+
   return (
     <div className="page registro insumo">
       <div className="header">
@@ -131,51 +169,118 @@ const Inventario = () => {
         </nav>
       </div>
       <div className="body">
-        <form className="form-registro" onSubmit={handleSubmit}>
-        <h2 className='login_title'>Registro de insumo</h2>
-          <div className="text-box">
-            <input type="text" required value={id_ins} onChange={(e) => setId_ins(e.target.value)}/>
-            <label>Id Insumo</label>
-          </div>
-          <div className="text-box">
-            <input type="text" required value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            <label>Nombre</label>
-          </div>
-          <div className="submit-button">
-            <button className='btn' type='submit'>Registrar</button>
-          </div>
+        <form className="radio-selection">
+          {rol&&(
+            <>
+            <div className="radio-button">
+            <input type="radio" onChange={handleRadio3} id="listaInsumo" checked={isLista===true}/>
+            <label for="listaInsumo">Inventario</label>
+            </div>
+            <div className="radio-button">
+            <input type="radio" onChange={handleRadio1} id="registroInsumo" checked={isRegistro===true}/>
+            <label for="registroInsumo">Registrar insumo</label>
+            </div>
+            <div className="radio-button">
+            <input type="radio" onChange={handleRadio2} id="ingresoInsumo" checked={isIngreso===true}/>
+            <label for="ingresoInsumo">Ingresar insumo</label>
+            </div>
+            </>
+          )}
+          
         </form>
-        <br></br>
-        <form className="form-registro" onSubmit={handleSubmit2}>
-        <h2 className='login_title'>Establecimiento</h2>
-          <div className="select-box">
-            <select name="Establecimientos" required value={estab_ins} onChange={(e) => setEstab_ins(e.target.value)}>
+        {isRegistro&&rol&&(
+          <form className="form-registro" onSubmit={handleSubmit}>
+          <h2 className='login_title'>Registro de insumo</h2>
+            <div className="text-box">
+              <input type="text" required value={id_ins} onChange={(e) => setId_ins(e.target.value)}/>
+              <label>Id Insumo</label>
+            </div>
+            <div className="text-box">
+              <input type="text" required value={nombre} onChange={(e) => setNombre(e.target.value)} />
+              <label>Nombre</label>
+            </div>
+            <div className="submit-button">
+              <button className='btn' type='submit'>Registrar</button>
+            </div>
+          </form>
+        )}
+
+        {isIngreso&&rol&&(
+          <form className="form-registro" onSubmit={handleSubmit2}>
+          <h2 className='login_title'>Establecimiento</h2>
+            <div className="select-box">
+              <select name="Establecimientos" required value={estab_ins} onChange={(e) => setEstab_ins(e.target.value)}>
+                {estab&&(
+                  <>
+                    <option value="">Seleccione un Establecimiento</option>
+                    {estab.map(e=>(
+                      <>
+                        <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+            <br></br>
+            <h2 className='login_title'>Ingreso de insumo</h2>
+            <div className="text-box">
+              <input type="text" required value={id_ins} onChange={(e) => setId_ins(e.target.value)}/>
+              <label>Id Insumo</label>
+            </div>
+            <div className="text-box">
+              <input type="text" required value={cant_ins} onChange={(e) => setCant_ins(e.target.value)} />
+              <label>Cantidad</label>
+            </div>
+            <div className="submit-button">
+              <button className='btn' type='submit'>Registrar</button>
+            </div>
+          </form>
+        )}
+        {/*Despliega la lista de insumos */}
+        {isLista&&(
+          <>
+          <form className="estab-selection" onSubmit={handleEstabSelection}>
+            <select name="Establecimientos" required value={estabSelected} onChange={(e) => setEstabSelected(e.target.value)}>
               {estab&&(
                 <>
+                  <option value="">Seleccione un Establecimiento</option>
                   {estab.map(e=>(
                     <>
-                      <option value="">Seleccione un Establecimiento</option>
                       <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
                     </>
                   ))}
                 </>
               )}
             </select>
-          </div>
-          <br></br>
-          <h2 className='login_title'>Ingreso de insumo</h2>
-          <div className="text-box">
-            <input type="text" required value={id_ins} onChange={(e) => setId_ins(e.target.value)}/>
-            <label>Id Insumo</label>
-          </div>
-          <div className="text-box">
-            <input type="text" required value={cant_ins} onChange={(e) => setCant_ins(e.target.value)} />
-            <label>Cantidad</label>
-          </div>
-          <div className="submit-button">
-            <button className='btn' type='submit'>Registrar</button>
-          </div>
-        </form>
+            <button type="submit">Mostrar</button>
+          </form>
+          {dataInsumos&&(
+              <div className="table-area">
+                <table className="rwd-table">
+                    <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Establecimiento</th>
+                        <th>Cantidad</th>
+                    </tr>
+                    {dataInsumos.map(dins=>(
+                        <>
+                        <tr>
+                            <td>{dins.id_insumo}</td>
+                            <td>{dins.nombre_insumo}</td>
+                            <td>{dins.estab_insumo}</td>
+                            <td>{dins.cant_insumo}</td>
+                        </tr>
+                        </>
+                    ))}
+                    </tbody>
+                </table>
+              </div>
+          )}
+            </>
+        )}
       </div>
     </div>
   )
