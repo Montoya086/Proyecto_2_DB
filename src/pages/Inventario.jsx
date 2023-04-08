@@ -58,38 +58,36 @@ const Inventario = () => {
 
   
 
-  const[id_ins, setId_ins]=useState('')
   const[nombre, setNombre]=useState('')
   const[estab_ins, setEstab_ins]=useState('')
   const[cant_ins, setCant_ins]=useState('')
-
+  //registro de insumo
   const handleSubmit = async (e) =>{
     e.preventDefault();
 
     const {data,error}=await supabase
     .rpc('set_insumo',{
-      id_ins:id_ins,
       nombre:nombre,
       log_mail:sesion,
-      log_info:"Se registró el insumo "+nombre+" con el ID "+id_ins
+      log_info:"Se registró el insumo "+nombre
     })
 
     if(error){
       console.log(error)
     }else{
-      setId_ins('')
       setNombre('')
+      alert("Ingresado correctamente")
     }
     if(data){
       //alert("Ingresado correctamente")
     }
   
   }
-
+  //ingreso de insumo
   const handleSubmit2 = async (e) =>{
     e.preventDefault();
 
-    const {data,error}=await supabase
+    /*const {data,error}=await supabase
     .rpc('set_insumo',{
       id_ins:id_ins,
       estab_ins:estab_ins,
@@ -106,7 +104,7 @@ const Inventario = () => {
     }
     if(data){
       //alert("Ingresado correctamente")
-    }
+    }*/
   
   }
 
@@ -188,13 +186,10 @@ const Inventario = () => {
           )}
           
         </form>
-        {isRegistro&&rol&&(
+        {/*Registro de insumo */}
+        {isRegistro&&(
           <form className="form-registro" onSubmit={handleSubmit}>
           <h2 className='login_title'>Registro de insumo</h2>
-            <div className="text-box">
-              <input type="text" required value={id_ins} onChange={(e) => setId_ins(e.target.value)}/>
-              <label>Id Insumo</label>
-            </div>
             <div className="text-box">
               <input type="text" required value={nombre} onChange={(e) => setNombre(e.target.value)} />
               <label>Nombre</label>
@@ -205,7 +200,7 @@ const Inventario = () => {
           </form>
         )}
 
-        {isIngreso&&rol&&(
+        {isIngreso&&(
           <form className="form-registro" onSubmit={handleSubmit2}>
           <h2 className='login_title'>Establecimiento</h2>
             <div className="select-box">
@@ -224,10 +219,6 @@ const Inventario = () => {
             </div>
             <br></br>
             <h2 className='login_title'>Ingreso de insumo</h2>
-            <div className="text-box">
-              <input type="text" required value={id_ins} onChange={(e) => setId_ins(e.target.value)}/>
-              <label>Id Insumo</label>
-            </div>
             <div className="text-box">
               <input type="text" required value={cant_ins} onChange={(e) => setCant_ins(e.target.value)} />
               <label>Cantidad</label>
