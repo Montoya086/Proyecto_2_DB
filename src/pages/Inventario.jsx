@@ -233,15 +233,15 @@ const Inventario = () => {
             <>
             <div className="radio-button">
             <input type="radio" onChange={handleRadio3} id="listaInsumo" checked={isLista===true}/>
-            <label for="listaInsumo">Inventario</label>
+            <label htmlFor="listaInsumo">Inventario</label>
             </div>
             <div className="radio-button">
             <input type="radio" onChange={handleRadio1} id="registroInsumo" checked={isRegistro===true}/>
-            <label for="registroInsumo">Registrar insumo</label>
+            <label htmlFor="registroInsumo">Registrar insumo</label>
             </div>
             <div className="radio-button">
             <input type="radio" onChange={handleRadio2} id="ingresoInsumo" checked={isIngreso===true}/>
-            <label for="ingresoInsumo">Ingresar insumo</label>
+            <label htmlFor="ingresoInsumo">Ingresar insumo</label>
             </div>
             </>
           )}
