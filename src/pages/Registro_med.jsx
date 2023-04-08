@@ -157,9 +157,9 @@ const Registro = () => {
             <select name="Establecimientos" required value={estab_r} onChange={(e) => setEstab_r(e.target.value)}>
               {estab&&(
                 <>
+                  <option value="">Seleccione un Establecimiento</option>
                   {estab.map(e=>(
                     <>
-                      <option value="">Seleccione un Establecimiento</option>
                       <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
                     </>
                   ))}

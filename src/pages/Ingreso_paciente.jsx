@@ -4,13 +4,35 @@ import { useSearchParams, createSearchParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 const IngresoPaciente = () => {
-  const[fetchError, setFetchError]=useState(null)
-  const[fecthData, setFetchData]=useState(null)
-  const[rol, setRol]=useState(null)
-
   const [searchparams] = useSearchParams();
   const [user_id] = useState(searchparams.get('id'));
 
+  const[fetchError, setFetchError]=useState(null)
+  const[fecthData, setFetchData]=useState(null)
+  const[rol, setRol]=useState(null)
+  const[estabList, setEstabList]=useState(null)
+  const[estabSelected, setEstabSelected]=useState('')
+  const[estabInventario, setEstabInventario]=useState(null)
+  const[estabMedicos, setEstabMedicos]=useState(null)
+  const[listaEnfermedades, setListaEnfermedades]=useState(null)
+  const[listaExamenes, setListaExamenes]=useState(null)
+  const[listaCirugias, setListaCirugias]=useState(null)
+  //variables del form de ingreso
+  const[dniPaciente, setDniPaciente]=useState('')
+  const[dniMedico, setDniMedico]=useState('')
+  const[evolucionPaciente, setEvolucionPaciente]=useState('')
+  const[statusPaciente, setStatusPaciente]=useState('')
+  const[enfermedadPaciente, setEnfermedadPaciente]=useState('')
+  const[precedentesPaciente, setPrecedentesPaciente]=useState('')
+  const[descDiagPaciente, setDescDiagPaciente]=useState('')
+  const[examenPaciente, setExamenPaciente]=useState('')
+  const[descResultPaciente, setDescResultPaciente]=useState('')
+  const[cirugiaPaciente, setCirugiaPaciente]=useState('')
+  const[descRealizPaciente, setDescRealizPaciente]=useState('')
+  const[insumoPaciente, setInsumoPaciente]=useState('')
+  const[cantInsumoPaciente, setCantInsumoPaciente]=useState('')
+
+  //fetch user data
   useEffect(()=>{
     const fetchTest= async ()=>{
       const {data,error}=await supabase
@@ -33,6 +55,105 @@ const IngresoPaciente = () => {
 
     fetchTest()
   },[user_id, fetchError])
+
+  //fetch establecimientos
+  useEffect(()=>{
+    const fetchTest= async ()=>{
+      const {data,error}=await supabase
+      .rpc('get_establecimientos')
+
+      if(error){
+        setEstabList(null)
+        console.log(error)
+      }
+      if(data){
+        setEstabList(data)
+      }
+    }
+    fetchTest()
+  },[])
+  //handle establecimiento selection
+  const handleEstabSelection = (e)=>{
+    e.preventDefault();
+    //fecth inventario
+    const fetchInventario=async ()=>{
+      const {data,error}=await supabase
+      .rpc('get_inventario_from_estab',{
+        id_estab: estabSelected
+      })
+
+      if(error){
+        setEstabInventario(null)
+        console.log(error)
+      }
+      if(data){
+        setEstabInventario(data)
+      }
+    }
+    //fetch medicos
+    const fetchMedicos=async ()=>{
+      const {data,error}=await supabase
+      .rpc('get_medicos_from_estab',{
+        id_estab: estabSelected
+      })
+
+      if(error){
+        setEstabMedicos(null)
+        console.log(error)
+      }
+      if(data){
+        setEstabMedicos(data)
+      }
+    }
+    //fetch enfermedades
+    const fetchEnfermedades=async()=>{
+      const {data,error}=await supabase
+      .rpc('get_enfermedades')
+
+      if(error){
+        setListaEnfermedades(null)
+        console.log(error)
+      }
+      if(data){
+        setListaEnfermedades(data)
+      }
+    }
+    //fecth examenes
+    const fetchExamenes=async()=>{
+      const {data,error}=await supabase
+      .rpc('get_examenes')
+
+      if(error){
+        setListaExamenes(null)
+        console.log(error)
+      }
+      if(data){
+        setListaExamenes(data)
+      }
+    }
+    //fetch cirugias
+    const fetchCirugias=async()=>{
+      const {data,error}=await supabase
+      .rpc('get_cirugias')
+
+      if(error){
+        setListaCirugias(null)
+        console.log(error)
+      }
+      if(data){
+        setListaCirugias(data)
+      }
+    }
+    fetchCirugias()
+    fetchExamenes()
+    fetchEnfermedades()
+    fetchInventario()
+    fetchMedicos()
+  }
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+  }
 
   return (
     <div className="page">
@@ -57,7 +178,162 @@ const IngresoPaciente = () => {
         </nav>
       </div>
       <div className="body">
-
+        {estabList&&(
+          <form className="estab-selection" onSubmit={handleEstabSelection}> 
+            <select name="Establecimientos" required value={estabSelected} onChange={(e) => setEstabSelected(e.target.value)}>
+              <option value="">Seleccione un Establecimiento</option>
+                    {estabList.map(e=>(
+                      <>
+                        <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
+                      </>
+                    ))}
+              </select>
+              <button type="submit">Seleccionar</button>
+          </form>
+        )}
+        {estabInventario&&estabMedicos&&(
+          <form className="form-registro form-ingreso-paciente" onSubmit={handleSubmit}>
+            <h2 className='login_title'>Ingreso de paciente</h2>
+            <h6>*Obligatorio</h6>
+            <div className="text-box">
+              <input type="text" required value={dniPaciente} onChange={(e) => setDniPaciente(e.target.value)}/>
+              <label>DNI del paciente*</label>
+            </div>
+            <div className="select-box">
+              <select name="Medicos" required value={dniMedico} onChange={(e) => setDniMedico(e.target.value)}>
+                {estabMedicos&&(
+                  <>
+                    <option value="">Seleccione un médico*</option>
+                    {estabMedicos.map(e=>(
+                      <>
+                        <option value={e.dni_medico}>{e.nombre_medico}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+            <div className="text-box">
+              <input type="text" required value={evolucionPaciente} onChange={(e) => setEvolucionPaciente(e.target.value)}/>
+              <label>Evolución*</label>
+            </div>
+            <div className="select-box">
+              <select name="Status" required value={statusPaciente} onChange={(e) => setStatusPaciente(e.target.value)}>
+                <option value="">Seleccione un status*</option>
+                <option value="Sano">Sano</option>
+                <option value="Enfermo">Enfermo</option>
+                <option value="Muerto">Muerto</option>
+              </select>
+            </div>
+            {/*Selección de enfermedad*/}
+            <div className="select-box">
+              <select name="Enfermedades" value={enfermedadPaciente} onChange={(e) => setEnfermedadPaciente(e.target.value)}>
+                {listaEnfermedades&&(
+                  <>
+                    <option value="">Seleccione una enfermedad</option>
+                    {listaEnfermedades.map(e=>(
+                      <>
+                        <option value={e.id_enfermedad}>{e.nombre_enfermedad}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+            {enfermedadPaciente&&(
+              <>
+              <h4 className="first-child">Datos de diagnóstico</h4>
+              <div className="select-box first-child">
+                <select name="Examenes" required value={precedentesPaciente} onChange={(e) => setPrecedentesPaciente(e.target.value)}>            
+                  <option value="">Seleccione una opción*</option>    
+                  <option value="Sin precedentes">Sin precedentes</option> 
+                  <option value="Con precedentes">Con precedentes</option> 
+                </select>
+                <label>Precedentes*</label>
+              </div>
+              <div className="text-box first-child">
+                <input type="text" required value={descDiagPaciente} onChange={(e) => setDescDiagPaciente(e.target.value)}/>
+                <label>Desc. de diagnóstico*</label>
+              </div>
+              </>
+            )}
+            {/*Selección de examen */}
+            <div className="select-box">
+              <select name="Examenes" value={examenPaciente} onChange={(e) => setExamenPaciente(e.target.value)}>
+                {listaExamenes&&(
+                  <>
+                    <option value="">Seleccione un examen</option>
+                    {listaExamenes.map(e=>(
+                      <>
+                        <option value={e.id_examen}>{e.nombre_examen}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+            {examenPaciente&&(
+              <>
+              <h4 className="first-child">Datos de resultado</h4>
+              <div className="text-box first-child">
+                <input type="text" required value={descResultPaciente} onChange={(e) => setDescResultPaciente(e.target.value)}/>
+                <label>Desc. de resultado*</label>
+              </div>
+              </>
+            )}
+            {/*Selección de cirugia */}
+            <div className="select-box">
+              <select name="Cirugias" value={cirugiaPaciente} onChange={(e) => setCirugiaPaciente(e.target.value)}>
+                {listaCirugias&&(
+                  <>
+                    <option value="">Seleccione una cirugia</option>
+                    {listaCirugias.map(e=>(
+                      <>
+                        <option value={e.id_cirugia}>{e.nombre_cirugia}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+            {cirugiaPaciente&&(
+              <>
+              <h4 className="first-child">Datos de realización</h4>
+              <div className="text-box first-child">
+                <input type="text" required value={descRealizPaciente} onChange={(e) => setDescRealizPaciente(e.target.value)}/>
+                <label>Desc. de realización*</label>
+              </div>
+              </>
+            )}
+            {/*Selección de insumo */}
+            <div className="select-box">
+              <select name="Insumos" value={insumoPaciente} onChange={(e) => setInsumoPaciente(e.target.value)}>
+                {estabInventario&&(
+                  <>
+                    <option value="">Seleccione un insumo</option>
+                    {estabInventario.map(e=>(
+                      <>
+                        <option value={e.id_insumo}>{e.nombre_insumo}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+            {insumoPaciente&&(
+              <>
+              <h4 className="first-child">Datos de insumo</h4>
+              <div className="text-box first-child">
+                <input type="text" required value={cantInsumoPaciente} onChange={(e) => setCantInsumoPaciente(e.target.value)}/>
+                <label>Cantidad*</label>
+              </div>
+              </>
+            )}
+            <div className="submit-button">
+              <button className='btn' type='submit'>Registrar</button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   )
