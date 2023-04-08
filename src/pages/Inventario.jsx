@@ -118,7 +118,9 @@ const Inventario = () => {
       console.log(error)
     }else{
       //si se ha registrado el insumo
-      var new_cant=parseInt(cant_ins)+parseInt(data[0].cantidad)
+      if(data[0]){
+        var new_cant=parseInt(cant_ins)+parseInt(data[0].cantidad)
+      }
       if(data[0]){
         const {data,error}=await supabase
         .rpc('set_insumo_estab',{
@@ -143,9 +145,9 @@ const Inventario = () => {
       else{
         const {data,error}=await supabase
         .rpc('set_new_insumo_estab',{
-          id_estab: estab_ins,
-          id_insumo: insumoIngreso,
-          cantidad: cant_ins,
+          id_estab: parseInt(estab_ins),
+          id_insumo: parseInt(insumoIngreso),
+          cantidad: parseInt(cant_ins),
           log_mail:sesion,
           log_info:"Se ingresó "+cant_ins+" unidades del insumo con ID: "+insumoIngreso+", al establecimiento con ID: "+estab_ins
         })
