@@ -126,7 +126,7 @@ const Inventario = () => {
           id_insumo: insumoIngreso,
           cantidad_ins: new_cant,
           log_mail:sesion,
-          log_info:"Se agregaron "+cant_ins+" unidades del insumo con ID:"+insumoIngreso+", al establecimiento con ID:"+estab_ins
+          log_info:"Se agregaron "+cant_ins+" unidades del insumo con ID: "+insumoIngreso+", al establecimiento con ID: "+estab_ins
         })
         if(error){
           console.log(error)
@@ -147,7 +147,7 @@ const Inventario = () => {
           id_insumo: insumoIngreso,
           cantidad: cant_ins,
           log_mail:sesion,
-          log_info:"Se ingresó "+cant_ins+" unidades del insumo con ID:"+insumoIngreso+", al establecimiento con ID:"+estab_ins
+          log_info:"Se ingresó "+cant_ins+" unidades del insumo con ID: "+insumoIngreso+", al establecimiento con ID: "+estab_ins
         })
         if(error){
           console.log(error)

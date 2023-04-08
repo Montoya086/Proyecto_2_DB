@@ -54,33 +54,15 @@ const Logs = () => {
       fetchTest()
   },[count])
 
-  const handleSubmitMore = async (e) =>{
+  const handleSubmitMore = (e) =>{
     e.preventDefault();
 
     setCount(count+10)
-    const {data,error}=await supabase
-    .rpc('get_logs',{num:count})
-    if(error){
-    setLogdata(null)
-    console.log(error)
-    }
-    if(data){
-    setLogdata(data)
-    }
   }
-  const handleSubmitLess = async (e) =>{
+  const handleSubmitLess = (e) =>{
     e.preventDefault();
     if(count>10){
         setCount(count-10)
-    }
-    const {data,error}=await supabase
-    .rpc('get_logs',{num:count})
-    if(error){
-    setLogdata(null)
-    console.log(error)
-    }
-    if(data){
-    setLogdata(data)
     }
   }
 
