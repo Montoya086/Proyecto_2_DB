@@ -105,9 +105,9 @@ const Home = () => {
                 <p>{patient[0].fecha_nac}</p>
                 <h5>Índice de masa corporal:</h5>
                 <p>{patient[0].ind_masa_paciente}</p>
-                <h5>Altura (m):</h5>
+                <h5>Altura(m):</h5>
                 <p>{patient[0].altura}</p>
-                <h5>Peso (Lb):</h5>
+                <h5>Peso(lb):</h5>
                 <p>{patient[0].peso}</p>
                 <h5>Adicciones:</h5>
                 {!patient[0].adicciones&&(

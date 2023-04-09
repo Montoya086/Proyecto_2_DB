@@ -38,7 +38,6 @@ const RegistroPaciente = () => {
 
   const[dni_p, setDni_p]=useState('')
   const[name_p, setName_p]=useState('')
-  const[ind_masa_p, setInd_masa_p]=useState('')
   const[altura_p, setAltura_p]=useState('')
   const[peso_p, setPeso_p]=useState('')
   const[addicciones_p, setAddicciones_p]=useState('')
@@ -55,7 +54,7 @@ const RegistroPaciente = () => {
     .rpc('set_paciente',{
       dni_p:dni_p,
       name_p:name_p,
-      ind_masa_p:parseFloat(ind_masa_p),
+      ind_masa_p:((parseFloat(peso_p)/2.205)/((parseFloat(altura_p)*(parseFloat(altura_p))))).toFixed(2),
       altura_p:parseFloat(altura_p),
       peso_p:parseFloat(peso_p),
       addicciones_p:addicciones_p,
@@ -73,7 +72,6 @@ const RegistroPaciente = () => {
       alert("Ingresado correctamente")
       setDni_p('')
       setName_p('')
-      setInd_masa_p('')
       setAltura_p('')
       setPeso_p('')
       setAddicciones_p('')
@@ -122,16 +120,12 @@ const RegistroPaciente = () => {
             <label>Nombre Completo</label>
           </div>
           <div className="text-box">
-            <input type="text" required value={ind_masa_p} onChange={(e) => setInd_masa_p(e.target.value)} />
-            <label>Índice de masa corporal</label>
-          </div>
-          <div className="text-box">
             <input type="text" required value={altura_p} onChange={(e) => setAltura_p(e.target.value)} />
-            <label>Altura</label>
+            <label>Altura(m)</label>
           </div>
           <div className="text-box">
             <input type="text" required value={peso_p} onChange={(e) => setPeso_p(e.target.value)} />
-            <label>Peso</label>
+            <label>Peso(lb)</label>
           </div>
           <div className="select-box">
             <select value={addicciones_p} required onChange={(e) => setAddicciones_p(e.target.value)}>

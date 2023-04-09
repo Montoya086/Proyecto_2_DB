@@ -20,7 +20,6 @@ const ActualizacionDatos = () => {
   const[estabList, setEstabList]=useState('')
   //variables con datos del paciente
   const[nombrePaciente, setNombrePaciente]=useState('')
-  const[indMasaPaciente, setIndMasaPaciente]=useState('')
   const[alturaPaciente, setAlturaPaciente]=useState('')
   const[pesoPaciente, setPesoPaciente]=useState('')
   const[adiccionesPaciente, setAdiccionesPaciente]=useState('')
@@ -92,7 +91,7 @@ const ActualizacionDatos = () => {
     .rpc('set_act_paciente',{
       dni_paciente:dniPaciente,
       nombre_paciente:nombrePaciente,
-      ind_masa_paciente:indMasaPaciente,
+      ind_masa_paciente:((parseFloat(pesoPaciente)/2.205)/((parseFloat(alturaPaciente)*(parseFloat(alturaPaciente))))).toFixed(2),
       altura_paciente:alturaPaciente,
       peso_paciente:pesoPaciente,
       adicciones_paciente:adiccionesPaciente,
@@ -127,7 +126,6 @@ const ActualizacionDatos = () => {
   useEffect(()=>{
     if(dataPaciente[0]){
       setNombrePaciente(dataPaciente[0].nombre_paciente)
-      setIndMasaPaciente(dataPaciente[0].ind_masa_paciente)
       setAlturaPaciente(dataPaciente[0].altura_paciente)
       setPesoPaciente(dataPaciente[0].peso_paciente)
       setAdiccionesPaciente(dataPaciente[0].adicciones_paciente)
@@ -272,16 +270,12 @@ const ActualizacionDatos = () => {
                 <label>Nombre Completo</label>
               </div>
               <div className="text-box">
-                <input type="text" required value={indMasaPaciente} onChange={(e) => setIndMasaPaciente(e.target.value)} />
-                <label>Índice de masa corporal</label>
-              </div>
-              <div className="text-box">
                 <input type="text" required value={alturaPaciente} onChange={(e) => setAlturaPaciente(e.target.value)} />
-                <label>Altura</label>
+                <label>Altura(m)</label>
               </div>
               <div className="text-box">
                 <input type="text" required value={pesoPaciente} onChange={(e) => setPesoPaciente(e.target.value)} />
-                <label>Peso</label>
+                <label>Peso(lb)</label>
               </div>
               <div className="select-box">
                 <select value={adiccionesPaciente} required onChange={(e) => setAdiccionesPaciente(e.target.value)}>
