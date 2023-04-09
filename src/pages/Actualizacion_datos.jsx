@@ -16,6 +16,8 @@ const ActualizacionDatos = () => {
   const[dniPaciente, setDniPaciente]=useState('')
   const[dniMedico, setDniMedico]=useState('')
   const[dataPaciente, setDataPaciente]=useState([])
+  const[dataMedico, setDataMedico]=useState([])
+  const[estabList, setEstabList]=useState('')
   //variables con datos del paciente
   const[nombrePaciente, setNombrePaciente]=useState('')
   const[indMasaPaciente, setIndMasaPaciente]=useState('')
@@ -33,6 +35,7 @@ const ActualizacionDatos = () => {
   const[numColegiadoMedico, setNumColegiadoMedico]=useState('')
   const[especialidadMedico, setEspecialidadMedico]=useState('')
   const[establecimientoMedico, setEstablecimientoMedico]=useState('')
+  const[newEstablecimientoMedico, setNewEstablecimientoMedico]=useState('')
   const[rolMedico, setRolMedico]=useState('')
 
   useEffect(()=>{
@@ -53,11 +56,26 @@ const ActualizacionDatos = () => {
             setRol(true)
           }
         }
-
     }
-
     fetchTest()
   },[user_id,fetchError])
+
+  //fetch establecimientos
+  useEffect(()=>{
+    const fetchTest= async ()=>{
+      const {data,error}=await supabase
+      .rpc('get_establecimientos')
+
+      if(error){
+        setEstabList(null)
+        console.log(error)
+      }
+      if(data){
+        setEstabList(data)
+      }
+    }
+    fetchTest()
+  },[])
 
   const handleRadio1 =(e)=>{
     setIsPaciente(true)
@@ -86,7 +104,6 @@ const ActualizacionDatos = () => {
       log_info: "Se actualizaron los datos del paciente con DNI: "+dniPaciente
     })
     if(error){
-      setDataPaciente(null)
       console.log(error)
     }else{
       setDataPaciente([])
@@ -94,9 +111,6 @@ const ActualizacionDatos = () => {
       alert('Guardado correctamente.')
     }
     if(data){}
-  }
-  const handleSubmitMedico=(e)=>{
-    e.preventDefault()
   }
   const handleBusquedaPaciente= async(e)=>{
     e.preventDefault()
@@ -123,9 +137,85 @@ const ActualizacionDatos = () => {
       setSexoPaciente(dataPaciente[0].sexo_paciente)
     }
   },[dataPaciente])
-  const handleBusquedaMedico=(e)=>{
+
+  //Medico
+  const handleSubmitMedico=async(e)=>{
     e.preventDefault()
+    if(newEstablecimientoMedico===establecimientoMedico){
+      const {data,error}=await supabase
+      .rpc('set_act_medico',{
+        dni_medico:dniMedico,
+        nombre_medico:nombreMedico,
+        telefono_medico:telefonoMedico,
+        direccion_medico:direccionMedico,
+        num_colegiado_medico:numColegiadoMedico,
+        especialidad_medico:especialidadMedico,
+        establecimiento_medico:newEstablecimientoMedico,
+        old_estab_medico: establecimientoMedico,
+        rol_medico:rolMedico,
+        est_change: false,
+        log_mail: sesion,
+        log_info: "Se actualizaron los datos del médico con DNI: "+dniMedico
+      })
+      if(error){
+        console.log(error)
+      }else{
+        setDataMedico([])
+        setDniMedico('')
+        alert('Guardado correctamente.')
+      }
+      if(data){}
+    }
+    else{
+      const {data,error}=await supabase
+      .rpc('set_act_medico',{
+        dni_medico:dniMedico,
+        nombre_medico:nombreMedico,
+        telefono_medico:telefonoMedico,
+        direccion_medico:direccionMedico,
+        num_colegiado_medico:numColegiadoMedico,
+        especialidad_medico:especialidadMedico,
+        establecimiento_medico:newEstablecimientoMedico,
+        old_estab_medico: establecimientoMedico,
+        rol_medico:rolMedico,
+        est_change: true,
+        log_mail: sesion,
+        log_info: "Se actualizaron los datos del médico con DNI: "+dniMedico
+      })
+      if(error){
+        console.log(error)
+      }else{
+        setDataMedico([])
+        setDniMedico('')
+        alert('Guardado correctamente.')
+      }
+      if(data){}
+    }
   }
+  const handleBusquedaMedico=async(e)=>{
+    e.preventDefault()
+    const {data,error}=await supabase
+    .rpc('get_medico_using_dni',{dni_medico:dniMedico})
+    if(error){
+      setDataMedico(null)
+      console.log(error)
+    }
+    if(data){
+      setDataMedico(data)
+    }
+  }
+  useEffect(()=>{
+    if(dataMedico[0]){
+      setNombreMedico(dataMedico[0].nombre_medico)
+      setTelefonoMedico(dataMedico[0].telefono_medico)
+      setDireccionMedico(dataMedico[0].direccion_medico)
+      setNumColegiadoMedico(dataMedico[0].num_colegiado_medico)
+      setEspecialidadMedico(dataMedico[0].especialidad_medico)
+      setEstablecimientoMedico(dataMedico[0].establecimiento_medico)
+      setNewEstablecimientoMedico(dataMedico[0].establecimiento_medico)
+      setRolMedico(dataMedico[0].rol_medico)
+    }
+  },[dataMedico])
 
   return (
     <div className="page">
@@ -237,9 +327,55 @@ const ActualizacionDatos = () => {
               <button className='search-button' type='submit'>Buscar</button>
             </form>
           </div>
-          <form className="form-registro" onSubmit={handleSubmitMedico}>
-            
-          </form>
+          {dataMedico[0]&&(
+            <form className="form-registro form-ingreso-paciente" onSubmit={handleSubmitMedico}>
+              <h2 className='login_title'>Registro de médicos</h2>
+              <div className="text-box">
+                <input type="text" required value={nombreMedico} onChange={(e) => setNombreMedico(e.target.value)} />
+                <label>Nombre Completo</label>
+              </div>
+              <div className="text-box">
+                <input type="text" required value={telefonoMedico} onChange={(e) => setTelefonoMedico(e.target.value)} />
+                <label>Número Telefónico</label>
+              </div>
+              <div className="text-box">
+                <input type="text" required value={direccionMedico} onChange={(e) => setDireccionMedico(e.target.value)} />
+                <label>Dirección</label>
+              </div>
+              <div className="text-box">
+                <input type="text" required value={numColegiadoMedico} onChange={(e) => setNumColegiadoMedico(e.target.value)} />
+                <label>No. Colegiado</label>
+              </div>
+              <div className="text-box">
+                <input type="text" required value={especialidadMedico} onChange={(e) => setEspecialidadMedico(e.target.value)} />
+                <label>Especialidad</label>
+              </div>
+              <div className="select-box">
+                <select name="Establecimientos" required value={newEstablecimientoMedico} onChange={(e) => setNewEstablecimientoMedico(e.target.value)}>
+                  {estabList&&(
+                    <>
+                      <option value="">Seleccione un Establecimiento</option>
+                      {estabList.map(e=>(
+                        <>
+                          <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
+                        </>
+                      ))}
+                    </>
+                  )}
+                </select>
+              </div>
+              <div className="select-box">
+                <select name="Roles" required value={rolMedico} onChange={(e) => setRolMedico(e.target.value)}>
+                  <option value="">Seleccione un rol</option>
+                  <option value="admin">Administrador</option>
+                  <option value="usuario">Usuario</option>
+                </select>
+              </div>
+              <div className="submit-button">
+                <button className='btn' type='submit'>Registrar</button>
+              </div>
+            </form>
+          )}
         </>
       )}
       </div>
