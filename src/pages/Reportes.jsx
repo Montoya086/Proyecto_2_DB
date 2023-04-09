@@ -11,6 +11,9 @@ const Reportes = () => {
   const[fetchError, setFetchError]=useState(null)
   const[fecthData, setFetchData]=useState(null)
   const[rol, setRol]=useState(null)
+  const[estabList, setEstabList]=useState(null)
+  const[estabSelected, setEstabSelected]=useState('')
+  const[limitInv, setLimitInv]=useState(15)
   const[is1, setIs1]=useState(true)
   const[is2, setIs2]=useState(false)
   const[is3, setIs3]=useState(false)
@@ -42,6 +45,22 @@ const Reportes = () => {
     }
     fetchTest()
   },[user_id, fetchError])
+
+  //fetch establecimientos
+  useEffect(()=>{
+    const fetchTest= async ()=>{
+      const {data,error}=await supabase
+      .rpc('get_establecimientos')
+
+      if(error){
+        console.log(error)
+      }
+      if(data){
+        setEstabList(data)
+      }
+    }
+    fetchTest()
+  },[])
 
   //fetch reporte 1
   useEffect(()=>{
@@ -83,6 +102,46 @@ const Reportes = () => {
         }
         if(data){
           setR3Data(data)
+        }
+    }
+    fetchTest()
+  },[])
+
+  //fetch reporte 4
+  const handleInt=(n)=>{
+    if(n===''){
+      return 0
+    }else{
+      return n
+    }
+  }
+  useEffect(()=>{
+    const fetchTest= async ()=>{
+      const {data,error}=await supabase
+        .rpc('get_reporte4',{
+          limit_inv:limitInv,
+          id_establecimiento:handleInt(estabSelected)
+        })
+        if(error){
+          console.log(error)
+        }
+        if(data){
+          setR4Data(data)
+        }
+    }
+    fetchTest()
+  },[limitInv, estabSelected])
+
+  //fetch reporte 5
+  useEffect(()=>{
+    const fetchTest= async ()=>{
+      const {data,error}=await supabase
+        .rpc('get_reporte5')
+        if(error){
+          console.log(error)
+        }
+        if(data){
+          setR5Data(data)
         }
     }
     fetchTest()
@@ -267,12 +326,70 @@ const Reportes = () => {
         {/*Reporte 4 */}
         {is4&&(
           <>
+          <form className="estab-selection" onSubmit={(e)=>e.preventDefault()}>
+            <select name="Establecimientos" required value={estabSelected} onChange={(e) => setEstabSelected(e.target.value)}>
+              {estabList&&(
+                <>
+                  <option value="">Seleccione un Establecimiento</option>
+                  {estabList.map(e=>(
+                    <>
+                      <option value={e.id}>{e.estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</option>
+                    </>
+                  ))}
+                </>
+              )}
+            </select>
+            <label htmlFor="limite" className="limit-inv">Limite: </label>
+            <input type="number" value={limitInv} onChange={(e) => setLimitInv(e.target.value)} id="limite" min="0" className="limit-inv-input"/>
+          </form>
+          {r4Data&&(
+            <>
+              <div className="table-area">
+                <table className="rwd-table">
+                  <tbody>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cantidad en existencia</th>
+                    </tr>
+                    {r4Data.map(e=>(
+                        <>
+                          <tr>
+                            <td>{e.nombre_insumo}</td>
+                            <td>{e.cantidad}</td>
+                          </tr>
+                        </>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
           </>
         )}
 
         {/*Reporte 5 */}
         {is5&&(
           <>
+          {r5Data&&(
+            <div className="table-area">
+              <table className="rwd-table">
+                <tbody>
+                  <tr>
+                    <th>Establecimiento</th>
+                    <th>Pacientes atendidos</th>
+                  </tr>
+                  {r5Data.map(e=>(
+                    <>
+                      <tr>
+                        <td>{e.nombre_estab+", "+e.direccion+", "+e.departamento+", "+e.municipio}</td>
+                        <td>{e.cantidad}</td>
+                      </tr>
+                    </>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
           </>
         )}
       </div>
