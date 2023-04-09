@@ -68,8 +68,32 @@ const ActualizacionDatos = () => {
     setIsMedico(true)
   }
 
-  const handleSubmitPaciente=(e)=>{
+  const handleSubmitPaciente= async(e)=>{
     e.preventDefault()
+    const {data,error}=await supabase
+    .rpc('set_act_paciente',{
+      dni_paciente:dniPaciente,
+      nombre_paciente:nombrePaciente,
+      ind_masa_paciente:indMasaPaciente,
+      altura_paciente:alturaPaciente,
+      peso_paciente:pesoPaciente,
+      adicciones_paciente:adiccionesPaciente,
+      sexo_paciente:sexoPaciente,
+      telefono_paciente:telefonoPaciente,
+      direccion_paciente:direccionPaciente,
+      nacimiento_paciente:nacimientoPaciente,
+      log_mail: sesion,
+      log_info: "Se actualizaron los datos del paciente con DNI: "+dniPaciente
+    })
+    if(error){
+      setDataPaciente(null)
+      console.log(error)
+    }else{
+      setDataPaciente([])
+      setDniPaciente('')
+      alert('Guardado correctamente.')
+    }
+    if(data){}
   }
   const handleSubmitMedico=(e)=>{
     e.preventDefault()
