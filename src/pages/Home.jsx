@@ -69,7 +69,6 @@ const Home = () => {
           {test&&(<h6>Bienvenido {test[0].nombre}</h6>)}
           {/*Public paths*/}
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
-          <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
           <Link to={{pathname:'/registro_paciente',search: createSearchParams({id: user_id}).toString()}}>Registro de paciente</Link>
           <Link to={{pathname:'/ingreso_paciente',search: createSearchParams({id: user_id}).toString()}}>Ingreso de paciente</Link>
           <Link to={{pathname:'/inventario',search: createSearchParams({id: user_id}).toString()}}>Inventario</Link>
@@ -78,6 +77,7 @@ const Home = () => {
           {test&&rol&&(
             <>
               <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro de médicos</Link>
+              <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
               <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
             </>
           )}
