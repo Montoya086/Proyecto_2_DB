@@ -18,7 +18,7 @@ const IngresoPaciente = () => {
   const[listaEnfermedades, setListaEnfermedades]=useState(null)
   const[listaExamenes, setListaExamenes]=useState(null)
   const[listaCirugias, setListaCirugias]=useState(null)
-  const[cantInsumo, setCantInsumo]=useState(null)
+  const[cantInsumo, setCantInsumo]=useState([])
   //variables del form de ingreso
   const[dniPaciente, setDniPaciente]=useState('')
   const[dniMedico, setDniMedico]=useState('')
@@ -176,51 +176,7 @@ const IngresoPaciente = () => {
         console.log(error)
       }
       if(data){
-        await setCantInsumo(data)
-        //si existe la cantidad del insumo
-        if(parseInt(cantInsumo[0].cantidad_insumo)>=parseInt(cantInsumoPaciente)){
-          const {data,error}=await supabase
-          .rpc('set_ingreso_paciente',{
-            dni_pac:dniPaciente,
-            dni_med:dniMedico,
-            id_establecimiento: estabSelected,
-            evolucion_paciente:evolucionPaciente,
-            status_paciente:statusPaciente,
-            enfermedad_paciente:handleInt(enfermedadPaciente),
-            precedentes_paciente:precedentesPaciente,
-            desc_diag_paciente:descDiagPaciente,
-            examen_paciente:handleInt(examenPaciente),
-            desc_result_paciente:descResultPaciente,
-            cirugia_paciente:handleInt(cirugiaPaciente),
-            desc_realiz_paciente:descRealizPaciente,
-            insumo_paciente:handleInt(insumoPaciente),
-            cant_insumo_paciente:handleInt(cantInsumoPaciente),
-            new_cant_insumo:parseInt(cantInsumo[0].cantidad_insumo)-parseInt(cantInsumoPaciente),
-            log_mail:sesion,
-            log_info: "Se ingresó al paciente con DNI: "+dniPaciente+" con el médio con DNI: "+dniMedico+". Se utilizaron '"+cantInsumoPaciente+"' unidades del insumo con ID: '"+insumoPaciente+"'. Se diagnosticó la enfermedad con ID: '"+enfermedadPaciente+"'. Se realizó el examen con ID: '"+examenPaciente+"'. Se realizó la cirugía con ID: '"+cirugiaPaciente+"'"
-          })
-          if(error){
-            console.log(error)
-          }else{
-            setDniPaciente('')
-            setDniMedico('')
-            setEvolucionPaciente('')
-            setStatusPaciente('')
-            setEnfermedadPaciente('')
-            setPrecedentesPaciente('')
-            setDescDiagPaciente('')
-            setExamenPaciente('')
-            setDescResultPaciente('')
-            setCirugiaPaciente('')
-            setDescRealizPaciente('')
-            setInsumoPaciente('')
-            setCantInsumoPaciente('')
-            alert('Ingresado correctamente.')
-          }
-          if(data){}
-        }else{
-          alert('No existe tal cantidad de insumo en el inventario, actualmente hay '+cantInsumo[0].cantidad_insumo+' unidades.')
-        }
+        setCantInsumo(data)
       }
     }else{
       const {data,error}=await supabase
@@ -263,9 +219,59 @@ const IngresoPaciente = () => {
       }
       if(data){}
     }
-    
-
   }
+
+  useEffect(()=>{
+    const setIngresoPaciente=async()=>{
+      //si existe la cantidad del insumo
+      if(parseInt(cantInsumo[0].cantidad_insumo)>=parseInt(cantInsumoPaciente)){
+        const {data,error}=await supabase
+        .rpc('set_ingreso_paciente',{
+          dni_pac:dniPaciente,
+          dni_med:dniMedico,
+          id_establecimiento: estabSelected,
+          evolucion_paciente:evolucionPaciente,
+          status_paciente:statusPaciente,
+          enfermedad_paciente:handleInt(enfermedadPaciente),
+          precedentes_paciente:precedentesPaciente,
+          desc_diag_paciente:descDiagPaciente,
+          examen_paciente:handleInt(examenPaciente),
+          desc_result_paciente:descResultPaciente,
+          cirugia_paciente:handleInt(cirugiaPaciente),
+          desc_realiz_paciente:descRealizPaciente,
+          insumo_paciente:handleInt(insumoPaciente),
+          cant_insumo_paciente:handleInt(cantInsumoPaciente),
+          new_cant_insumo:parseInt(cantInsumo[0].cantidad_insumo)-parseInt(cantInsumoPaciente),
+          log_mail:sesion,
+          log_info: "Se ingresó al paciente con DNI: "+dniPaciente+" con el médio con DNI: "+dniMedico+". Se utilizaron '"+cantInsumoPaciente+"' unidades del insumo con ID: '"+insumoPaciente+"'. Se diagnosticó la enfermedad con ID: '"+enfermedadPaciente+"'. Se realizó el examen con ID: '"+examenPaciente+"'. Se realizó la cirugía con ID: '"+cirugiaPaciente+"'"
+        })
+        if(error){
+          console.log(error)
+        }else{
+          setDniPaciente('')
+          setDniMedico('')
+          setEvolucionPaciente('')
+          setStatusPaciente('')
+          setEnfermedadPaciente('')
+          setPrecedentesPaciente('')
+          setDescDiagPaciente('')
+          setExamenPaciente('')
+          setDescResultPaciente('')
+          setCirugiaPaciente('')
+          setDescRealizPaciente('')
+          setInsumoPaciente('')
+          setCantInsumoPaciente('')
+          alert('Ingresado correctamente.')
+        }
+        if(data){}
+      }else{
+        alert('No existe tal cantidad de insumo en el inventario, actualmente hay '+cantInsumo[0].cantidad_insumo+' unidades.')
+      }
+    }
+    if(cantInsumo[0]){
+      setIngresoPaciente()
+    }
+  },[cantInsumo])
 
   return (
     <div className="page">
