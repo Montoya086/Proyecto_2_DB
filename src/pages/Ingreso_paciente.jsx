@@ -1,5 +1,5 @@
 import supabase from "../config/supabaseClient"
-import { useEffect,useState } from "react"
+import { useEffect,useRef,useState } from "react"
 import { useSearchParams, createSearchParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 
@@ -33,7 +33,22 @@ const IngresoPaciente = () => {
   const[descRealizPaciente, setDescRealizPaciente]=useState('')
   const[insumoPaciente, setInsumoPaciente]=useState('')
   const[cantInsumoPaciente, setCantInsumoPaciente]=useState('')
-
+  //references
+  const cantInsumoPaciente_ref = useRef(cantInsumoPaciente);
+  const cirugiaPaciente_ref = useRef(cirugiaPaciente);
+  const descDiagPaciente_ref = useRef(descDiagPaciente);
+  const descRealizPaciente_ref = useRef(descRealizPaciente);
+  const descResultPaciente_ref = useRef(descResultPaciente);
+  const dniMedico_ref = useRef(dniMedico);
+  const dniPaciente_ref = useRef(dniPaciente);
+  const enfermedadPaciente_ref = useRef(enfermedadPaciente);
+  const estabSelected_ref = useRef(estabSelected);
+  const evolucionPaciente_ref = useRef(evolucionPaciente);
+  const examenPaciente_ref = useRef(examenPaciente);
+  const insumoPaciente_ref = useRef(insumoPaciente);
+  const precedentesPaciente_ref = useRef(precedentesPaciente);
+  const sesion_ref = useRef(sesion);
+  const statusPaciente_ref = useRef(statusPaciente);
   //fetch user data
   useEffect(()=>{
     const fetchTest= async ()=>{
@@ -224,26 +239,26 @@ const IngresoPaciente = () => {
   useEffect(()=>{
     const setIngresoPaciente=async()=>{
       //si existe la cantidad del insumo
-      if(parseInt(cantInsumo[0].cantidad_insumo)>=parseInt(cantInsumoPaciente)){
+      if(parseInt(cantInsumo[0].cantidad_insumo)>=parseInt(cantInsumoPaciente_ref.current)){
         const {data,error}=await supabase
         .rpc('set_ingreso_paciente',{
-          dni_pac:dniPaciente,
-          dni_med:dniMedico,
-          id_establecimiento: estabSelected,
-          evolucion_paciente:evolucionPaciente,
-          status_paciente:statusPaciente,
-          enfermedad_paciente:handleInt(enfermedadPaciente),
-          precedentes_paciente:precedentesPaciente,
-          desc_diag_paciente:descDiagPaciente,
-          examen_paciente:handleInt(examenPaciente),
-          desc_result_paciente:descResultPaciente,
-          cirugia_paciente:handleInt(cirugiaPaciente),
-          desc_realiz_paciente:descRealizPaciente,
-          insumo_paciente:handleInt(insumoPaciente),
-          cant_insumo_paciente:handleInt(cantInsumoPaciente),
-          new_cant_insumo:parseInt(cantInsumo[0].cantidad_insumo)-parseInt(cantInsumoPaciente),
-          log_mail:sesion,
-          log_info: "Se ingresó al paciente con DNI: "+dniPaciente+" con el médio con DNI: "+dniMedico+". Se utilizaron '"+cantInsumoPaciente+"' unidades del insumo con ID: '"+insumoPaciente+"'. Se diagnosticó la enfermedad con ID: '"+enfermedadPaciente+"'. Se realizó el examen con ID: '"+examenPaciente+"'. Se realizó la cirugía con ID: '"+cirugiaPaciente+"'"
+          dni_pac:dniPaciente_ref.current,
+          dni_med:dniMedico_ref.current,
+          id_establecimiento: estabSelected_ref.current,
+          evolucion_paciente:evolucionPaciente_ref.current,
+          status_paciente:statusPaciente_ref.current,
+          enfermedad_paciente:handleInt(enfermedadPaciente_ref.current),
+          precedentes_paciente:precedentesPaciente_ref.current,
+          desc_diag_paciente:descDiagPaciente_ref.current,
+          examen_paciente:handleInt(examenPaciente_ref.current),
+          desc_result_paciente:descResultPaciente_ref.current,
+          cirugia_paciente:handleInt(cirugiaPaciente_ref.current),
+          desc_realiz_paciente:descRealizPaciente_ref.current,
+          insumo_paciente:handleInt(insumoPaciente_ref.current),
+          cant_insumo_paciente:handleInt(cantInsumoPaciente_ref.current),
+          new_cant_insumo:parseInt(cantInsumo[0].cantidad_insumo)-parseInt(cantInsumoPaciente_ref.current),
+          log_mail:sesion_ref.current,
+          log_info: "Se ingresó al paciente con DNI: "+dniPaciente_ref.current+" con el médio con DNI: "+dniMedico_ref.current+". Se utilizaron '"+cantInsumoPaciente_ref.current+"' unidades del insumo con ID: '"+insumoPaciente_ref.current+"'. Se diagnosticó la enfermedad con ID: '"+enfermedadPaciente_ref.current+"'. Se realizó el examen con ID: '"+examenPaciente_ref.current+"'. Se realizó la cirugía con ID: '"+cirugiaPaciente_ref.current+"'"
         })
         if(error){
           console.log(error)
@@ -272,6 +287,24 @@ const IngresoPaciente = () => {
       setIngresoPaciente()
     }
   },[cantInsumo])
+
+  useEffect(()=>{
+    cantInsumoPaciente_ref.current = cantInsumoPaciente;
+    cirugiaPaciente_ref.current = cirugiaPaciente;
+    descDiagPaciente_ref.current = descDiagPaciente;
+    descRealizPaciente_ref.current = descRealizPaciente;
+    descResultPaciente_ref.current = descResultPaciente;
+    dniMedico_ref.current = dniMedico;
+    dniPaciente_ref.current = dniPaciente;
+    enfermedadPaciente_ref.current = enfermedadPaciente;
+    estabSelected_ref.current = estabSelected;
+    evolucionPaciente_ref.current = evolucionPaciente;
+    examenPaciente_ref.current = examenPaciente;
+    insumoPaciente_ref.current = insumoPaciente;
+    precedentesPaciente_ref.current = precedentesPaciente;
+    sesion_ref.current = sesion;
+    statusPaciente_ref.current = statusPaciente;
+  },[cantInsumoPaciente,cirugiaPaciente,descDiagPaciente,descRealizPaciente,descResultPaciente,dniMedico,dniPaciente,enfermedadPaciente,estabSelected,evolucionPaciente,examenPaciente,insumoPaciente,precedentesPaciente,sesion,statusPaciente])
 
   return (
     <div className="page">
