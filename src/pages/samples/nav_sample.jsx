@@ -37,9 +37,10 @@ const Registro = () => {
   return (
     <div className="page">
       <div className="header">
-      <nav>
-          <h1></h1>
+      <h1></h1>
           {fecthData&&(<h6>Bienvenido {fecthData[0].nombre}</h6>)}
+      <nav>
+          
           {/*Public paths*/}
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
           <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>

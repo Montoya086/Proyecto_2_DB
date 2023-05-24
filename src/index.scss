@@ -21,6 +21,10 @@ nav {
   .logout{
     font-weight: bold;
   }
+
+  @media (max-width: 768px) {
+    display: none; /* Oculta el elemento en dispositivos con un ancho máximo de 768px */
+  }
 }
 
 nav a {
@@ -41,6 +45,121 @@ nav h1 {
   margin: 20px auto;
   padding: 20px;
 }
+
+
+/* No implementado */
+/*
+  NavBar 
+  */
+
+  .navbar {
+   
+
+    ul {
+       
+      display: flex;
+  
+      li {
+         
+        position: relative;
+        margin-right: 28px;
+        font-size: 14px;
+        font-weight: bold;
+  
+        a {
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.5px;
+            background: #fff;
+            transform: scaleX(0);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            transform-origin: right center;
+          }
+  
+          &:hover::after {
+            transform: scaleX(1);
+            transform-origin: left center;
+            transition-duration: 0.4s;
+          }
+        }
+      }
+    }
+  }
+
+  nav.mobile-nav {
+   
+    padding-top: 80px;
+    display: inline-block;
+    position: fixed;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 300px;
+    background-color: #000;
+    margin-left: 100px;
+    transition: right 0.3s ease-in-out;
+  
+    &.active {
+       
+      display: inline-block;
+      right: 0;
+    }
+  
+    a {
+       
+      display: block;
+      justify-items: center;
+      opacity: 0;
+      width: 60%;
+      border-bottom: 1px solid #222;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      padding-left: 75px;
+      text-decoration: none;
+      font-size: 15px;
+      text-align: right;
+      transition: opacity .3s linear;
+      transition-delay: .2s;
+  
+      &:hover {
+        color: #aaa;
+      }
+    }
+  
+    &.active a {
+      opacity: 1;
+    }
+  
+    a {
+      &:nth-child(2) {
+        transition-delay: .25s;
+      }
+  
+      &:nth-child(3) {
+        transition-delay: .3s;
+      }
+  
+      &:nth-child(4) {
+        transition-delay: .35s;
+      }
+  
+      &:nth-child(5) {
+        transition-delay: .4s;
+      }
+  
+      &:nth-child(6) {
+        transition-delay: .45s;
+      }
+    }
+  }
+
+  /**********************/
+
 
 .container{
   display: flex;
