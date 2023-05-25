@@ -218,7 +218,7 @@ const ActualizacionDatos = () => {
 
   return (
     <div className="page">
-      <Header user_id={user_id} test={fecthData} rol={rol} />
+      <Header user_id={user_id} test={fecthData} rol={rol} pageTitle={"Actualización de Datos"}/>
       <div className="body">
       <form className="radio-selection">
         {rol&&(

@@ -187,7 +187,7 @@ const Reportes = () => {
 
   return (
     <div className="page">
-      <Header user_id={user_id} test={fecthData} rol={rol} />
+      <Header user_id={user_id} test={fecthData} rol={rol} pageTitle={"Reportes"}/>
       <div className="body">
         <form className="radio-selection">
           <div className="radio-button">

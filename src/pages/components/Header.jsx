@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createSearchParams } from "react-router-dom";
+import Logo from "../../images/logo.png";
 
-const Header = ({ user_id, test, rol }) => {
+const Header = ({ user_id, test, rol, pageTitle}) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const handleMobileNavClick = () => {
@@ -14,11 +15,11 @@ const Header = ({ user_id, test, rol }) => {
       <nav>
         {test ? (
           <>
-            <h1>Página principal</h1>
+            <h1>{pageTitle}</h1>
             <h6>Bienvenido {test[0].nombre}</h6>
           </>
         ) : (
-          <h1>Ingreso de paciente</h1>
+            <h1>{pageTitle}</h1>
         )}
         <Link to={{ pathname: "/home", search: createSearchParams({ id: user_id }).toString() }}>Home</Link>
         <Link to={{ pathname: "/registro_paciente", search: createSearchParams({ id: user_id }).toString() }}>Registro de paciente</Link>

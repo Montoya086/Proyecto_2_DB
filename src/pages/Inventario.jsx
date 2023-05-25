@@ -210,7 +210,7 @@ const Inventario = () => {
 
   return (
     <div className="page registro insumo">
-      <Header user_id={user_id} test={test} rol={rol} />
+      <Header user_id={user_id} test={test} rol={rol} pageTitle={"Inventario"}/>
       <div className="body">
         <form className="radio-selection">
           {rol&&(

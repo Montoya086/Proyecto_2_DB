@@ -63,7 +63,7 @@ const Home = () => {
 
   return (
       <div className="page home">
-      <Header user_id={user_id} test={test} rol={rol} />
+      <Header user_id={user_id} test={test} rol={rol} pageTitle={"Página Principal"}/>
       <div className="body">
         {/*Search paciente form*/}
         <div className="search">

@@ -107,7 +107,7 @@ const Registro = () => {
   }
   return (
     <div className="page registro">
-      <Header user_id={user_id} test={test} rol={rol} />
+      <Header user_id={user_id} test={test} rol={rol} pageTitle={"Registro de Medico"}/>
       <div className="body">
         <form className="form-registro" onSubmit={handleSubmit}>
           <h2 className='login_title'>Registro de médicos</h2>

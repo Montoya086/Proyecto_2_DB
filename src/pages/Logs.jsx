@@ -69,7 +69,7 @@ const Logs = () => {
 
   return (
     <div className="page">
-      <Header user_id={user_id} test={fecthData} rol={rol} />
+      <Header user_id={user_id} test={fecthData} rol={rol} pageTitle={"Historial de Logs"}/>
       <div className="body">
         {logdata&&(
             <>

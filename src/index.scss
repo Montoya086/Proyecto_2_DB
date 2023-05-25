@@ -1,4 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+.logo {
+  padding-left: 7%;
+   
+  width: 206px;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
 @media (max-width: 811px) {
   nav>*:not(h1, nav-right, .hamburger){
     display: none;

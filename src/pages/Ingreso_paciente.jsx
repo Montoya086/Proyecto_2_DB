@@ -309,7 +309,7 @@ const IngresoPaciente = () => {
 
   return (
     <div className="page">
-      <Header user_id={user_id} test={fecthData} rol={rol} />
+      <Header user_id={user_id} test={fecthData} rol={rol} pageTitle={"Ingreso de Paciente"}/>
       <div className="body">
         {estabList&&(
           <form className="estab-selection" onSubmit={handleEstabSelection}> 
