@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 @media (max-width: 800px) {
-  nav>*:not(h1, hamburger){
+  nav>*:not(h1, nav-right){
     display: none;
   }
   
