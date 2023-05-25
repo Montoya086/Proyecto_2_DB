@@ -2,6 +2,7 @@ import supabase from "../config/supabaseClient"
 import { useEffect,useRef,useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 const IngresoPaciente = () => {
   const [searchparams] = useSearchParams();
@@ -467,6 +468,7 @@ const IngresoPaciente = () => {
           </form>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

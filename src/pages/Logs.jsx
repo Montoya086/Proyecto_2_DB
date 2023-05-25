@@ -2,6 +2,7 @@ import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 const Logs = () => {
   const[fetchError, setFetchError]=useState(null)
@@ -106,6 +107,7 @@ const Logs = () => {
             </>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

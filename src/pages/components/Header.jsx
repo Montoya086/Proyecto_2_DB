@@ -35,9 +35,9 @@ const Header = ({ user_id, test, rol }) => {
         <Link to="/" className="logout">Logout</Link>
         <div className={`shadow ${isMobileNavOpen ? "active" : ""}`} />
         <div className={`hamburger ${isMobileNavOpen ? "active" : ""}`} onClick={handleMobileNavClick}>
-          <div className="line"/>
-          <div className="line"/>
-          <div className="line"/>
+            <span />
+          <span />
+          <span />
         </div>
         <nav className={`mobile-nav ${isMobileNavOpen ? "active" : ""}`} style={{ right: isMobileNavOpen ? "0" : "-280px" }}>
           <Link to={{ pathname: "/home", search: createSearchParams({ id: user_id }).toString() }}>Home</Link>
