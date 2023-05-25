@@ -23,7 +23,10 @@ const Header = ({ user_id, test, rol, pageTitle}) => {
             <h6>Bienvenido {test[0].nombre}</h6>
           </>
         ) : (
+            <div className="logo">
+            <img src={Logo} alt="MedicCare" />
             <h1>{pageTitle}</h1>
+        </div>
         )}
         <Link to={{ pathname: "/home", search: createSearchParams({ id: user_id }).toString() }}>Home</Link>
         <Link to={{ pathname: "/registro_paciente", search: createSearchParams({ id: user_id }).toString() }}>Registro de paciente</Link>
