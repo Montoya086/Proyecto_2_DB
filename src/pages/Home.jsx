@@ -1,7 +1,7 @@
 import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
-import { useSearchParams, createSearchParams } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
+import Header from "./components/Header"
 
 const Home = () => {
   //get user id
@@ -60,62 +60,9 @@ const Home = () => {
     }
   }
 
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-
-  const handleMobileNavClick = () => {
-    setIsMobileNavOpen(!isMobileNavOpen);
-  };
-
   return (
-    <div className="page home">
-      <div className="header">
-        {/*Navigation bar*/}
-        <nav>
-          <h1>Página principal</h1>
-          {test&&(<h6>Bienvenido {test[0].nombre}</h6>)}
-          {/*Public paths*/}
-          <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
-          <Link to={{pathname:'/registro_paciente',search: createSearchParams({id: user_id}).toString()}}>Registro de paciente</Link>
-          <Link to={{pathname:'/ingreso_paciente',search: createSearchParams({id: user_id}).toString()}}>Ingreso de paciente</Link>
-          <Link to={{pathname:'/inventario',search: createSearchParams({id: user_id}).toString()}}>Inventario</Link>
-          <Link to={{pathname:'/act_datos',search: createSearchParams({id: user_id}).toString()}}>Act. de datos</Link>
-          {/*Private paths*/}
-          {test&&rol&&(
-            <>
-              <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro de médicos</Link>
-              <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
-              <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
-            </>
-          )}
-          <Link to="/" className="logout">Logout</Link>
-          
-          <div className={`shadow ${isMobileNavOpen ? "active" : ""}`} />
-        <button className={`hamburger ${isMobileNavOpen ? "active" : ""}`} onClick={handleMobileNavClick}>
-          <span />
-          <span />
-          <span />
-        </button>
-
-      <nav className={`mobile-nav ${isMobileNavOpen ? "active" : ""}`} style={{ right: isMobileNavOpen ? "0" : "-280px" }}>
-        {/*Public paths*/}
-        <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
-          <Link to={{pathname:'/registro_paciente',search: createSearchParams({id: user_id}).toString()}}>Registro de paciente</Link>
-          <Link to={{pathname:'/ingreso_paciente',search: createSearchParams({id: user_id}).toString()}}>Ingreso de paciente</Link>
-          <Link to={{pathname:'/inventario',search: createSearchParams({id: user_id}).toString()}}>Inventario</Link>
-          <Link to={{pathname:'/act_datos',search: createSearchParams({id: user_id}).toString()}}>Act. de datos</Link>
-          {/*Private paths*/}
-          {test&&rol&&(
-            <>
-              <Link to={{pathname:'/registro',search: createSearchParams({id: user_id}).toString()}}>Registro de médicos</Link>
-              <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
-              <Link to={{pathname:'/logs',search: createSearchParams({id: user_id}).toString()}}>Logs</Link>
-            </>
-          )}
-          <Link to="/" className="logout">Logout</Link>
-      </nav>
-        </nav>
-        
-      </div>
+      <div className="page home">
+      <Header user_id={user_id} test={test} rol={rol} />
       <div className="body">
         {/*Search paciente form*/}
         <div className="search">
