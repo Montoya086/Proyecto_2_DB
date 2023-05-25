@@ -238,8 +238,8 @@ const ActualizacionDatos = () => {
       {isPaciente&&(
         <>
           <div className="search">
+          <h2>Buscar paciente</h2>
             <form onSubmit={handleBusquedaPaciente}>
-              <h2>Buscar paciente</h2>
               <input className='search-input' placeholder='DNI' type="text" value={dniPaciente} onChange={(e) => setDniPaciente(e.target.value)}/>
               <button className='search-button' type='submit'>Buscar</button>
             </form>

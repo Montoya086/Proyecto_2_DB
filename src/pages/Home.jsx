@@ -67,8 +67,8 @@ const Home = () => {
       <div className="body">
         {/*Search paciente form*/}
         <div className="search">
+        <h2>Buscar paciente</h2>
           <form onSubmit={handleSubmit}>
-            <h2>Buscar paciente</h2>
             <input className='search-input' placeholder='DNI' type="text" value={dni} onChange={(e) => setDni(e.target.value)}/>
             <button className='search-button' type='submit'>Buscar</button>
           </form>
