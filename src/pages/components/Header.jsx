@@ -15,7 +15,11 @@ const Header = ({ user_id, test, rol, pageTitle}) => {
       <nav>
         {test ? (
           <>
+          <div className="logo">
+            <img src={Logo} alt="MedicCare" />
             <h1>{pageTitle}</h1>
+        </div>
+            
             <h6>Bienvenido {test[0].nombre}</h6>
           </>
         ) : (
