@@ -34,13 +34,19 @@ const Registro = () => {
     fetchTest()
   },[user_id])
 
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const handleMobileNavClick = () => {
+    setIsMobileNavOpen(!isMobileNavOpen);
+  };
+
+
   return (
     <div className="page">
       <div className="header">
       <h1></h1>
           {fecthData&&(<h6>Bienvenido {fecthData[0].nombre}</h6>)}
       <nav>
-          
           {/*Public paths*/}
           <Link to={{pathname:'/home',search: createSearchParams({id: user_id}).toString()}}>Home</Link>
           <Link to={{pathname:'/reportes',search: createSearchParams({id: user_id}).toString()}}>Reportes</Link>
@@ -56,7 +62,32 @@ const Registro = () => {
             </>
           )}
           <Link to="/" className="logout">Logout</Link>
-        </nav>
+          <button className={`hamburger ${isMobileNavOpen ? "active" : ""}`} onClick={handleMobileNavClick}>
+          <span />
+          <span />
+          <span />
+        </button>
+      </nav>
+      <nav className="navbar-right">
+        <ul>
+          <li>
+            <a href="index.html">Shop</a>
+          </li>
+        </ul>
+        <div className={`shadow ${isMobileNavOpen ? "active" : ""}`} />
+        <button className={`hamburger ${isMobileNavOpen ? "active" : ""}`} onClick={handleMobileNavClick}>
+          <span />
+          <span />
+          <span />
+        </button>
+      </nav>
+      <nav className={`mobile-nav ${isMobileNavOpen ? "active" : ""}`} style={{ right: isMobileNavOpen ? "0" : "-280px" }}>
+        <a href="index.html">Mission</a>
+        <a href="index.html">Launches</a>
+        <a href="index.html">Careers</a>
+        <a href="index.html">Updates</a>
+        <a href="index.html">Shop</a>
+      </nav>
       </div>
       <div className="body">
 

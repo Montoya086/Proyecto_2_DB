@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 @media (max-width: 768px) {
-  nav>*:not(h1){
+  nav>*:not(h1, hamburger){
     display: none;
   }
+  
   nav{
     height: 40px;
     justify-content: space-between;
@@ -70,47 +71,52 @@ nav h1 {
 
 
 /* No implementado */
-/*
-  NavBar 
-  */
 
-  .navbar {
+.navbar-right {
    
+  position: relative;
+  width: fit-content;
+  display: flex;
+  margin-left: 160px;
+  
+  ul {
+     
+    display: flex;
 
-    ul {
+    li {
        
-      display: flex;
-  
-      li {
-         
-        position: relative;
-        margin-right: 28px;
-        font-size: 14px;
-        font-weight: bold;
-  
-        a {
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0.5px;
-            background: #fff;
-            transform: scaleX(0);
-            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            transform-origin: right center;
-          }
-  
-          &:hover::after {
-            transform: scaleX(1);
-            transform-origin: left center;
-            transition-duration: 0.4s;
-          }
+      position: relative;
+      margin-right: 28px;
+      font-size: 14px;
+      font-weight: bold;
+
+      a {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 0.5px;
+          background: #fff;
+          transform: scaleX(0);
+          transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+          transform-origin: right center;
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+          transform-origin: left center;
+          transition-duration: 0.4s;
         }
       }
     }
   }
+}
+
+/*
+  NavBar 
+  */
 
   nav.mobile-nav {
    
@@ -121,13 +127,12 @@ nav h1 {
     top: 0;
     bottom: 0;
     z-index: 2;
-    width: 300px;
-    background-color: #000;
+    width: 200px;
+    background-color: #355e79;
     margin-left: 100px;
     transition: right 0.3s ease-in-out;
   
     &.active {
-       
       display: inline-block;
       right: 0;
     }
