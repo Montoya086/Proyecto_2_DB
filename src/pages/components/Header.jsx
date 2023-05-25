@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createSearchParams } from "react-router-dom";
-import Logo from "../../images/logo.png";
+import Logo from "../../images/logo2.png";
 
 const Header = ({ user_id, test, rol, pageTitle}) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
