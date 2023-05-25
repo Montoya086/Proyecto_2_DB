@@ -34,11 +34,11 @@ const Header = ({ user_id, test, rol }) => {
         )}
         <Link to="/" className="logout">Logout</Link>
         <div className={`shadow ${isMobileNavOpen ? "active" : ""}`} />
-        <button className={`hamburger ${isMobileNavOpen ? "active" : ""}`} onClick={handleMobileNavClick}>
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className={`hamburger ${isMobileNavOpen ? "active" : ""}`} onClick={handleMobileNavClick}>
+          <div className="line"/>
+          <div className="line"/>
+          <div className="line"/>
+        </div>
         <nav className={`mobile-nav ${isMobileNavOpen ? "active" : ""}`} style={{ right: isMobileNavOpen ? "0" : "-280px" }}>
           <Link to={{ pathname: "/home", search: createSearchParams({ id: user_id }).toString() }}>Home</Link>
           <Link to={{ pathname: "/registro_paciente", search: createSearchParams({ id: user_id }).toString() }}>Registro de paciente</Link>
@@ -54,7 +54,7 @@ const Header = ({ user_id, test, rol }) => {
               </>
             )}
             <Link to="/" className="logout">Logout</Link>
-          </nav>
+        </nav>
         </nav>
         </div>
       );

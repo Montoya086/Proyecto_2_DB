@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 @media (max-width: 800px) {
-  nav>*:not(h1, nav-right){
+  nav>*:not(h1, nav-right, .hamburger){
     display: none;
   }
   
@@ -14,10 +14,33 @@
       font-size: 15px;
     }
   }
+  nav.mobile-nav {
+    visibility: hidden;
+    &.active {
+      visibility: visible;
+    }
+  }
 }
 @media (min-width: 801px){
   nav a{
     display: inline-block;
+  }
+  nav.mobile-nav {
+    visibility: hidden;
+    &.active {
+      visibility: hidden;
+    }
+  }
+}
+.hamburger{
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  .line{
+    width: 25px;
+    margin: 2px;
+    height: 3px;
+    background-color: white;
   }
 }
 :root {
@@ -119,19 +142,18 @@ nav h1 {
   */
 
   nav.mobile-nav {
-   
     padding-top: 80px;
     display: inline-block;
     position: fixed;
     justify-content: center;
-    top: 0;
+    top: 80px;
     bottom: 0;
     z-index: 2;
-    width: 200px;
+    width: 300px;
+    height: fit-content;
     background-color: #355e79;
     margin-left: 100px;
     transition: right 0.3s ease-in-out;
-  
     &.active {
       display: inline-block;
       right: 0;
