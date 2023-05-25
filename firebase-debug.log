@@ -1,0 +1,65 @@
+[debug] [2023-05-25T09:23:06.202Z] ----------------------------------------------------------------------
+[debug] [2023-05-25T09:23:06.209Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andres\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-25T09:23:06.210Z] CLI Version:   11.30.0
+[debug] [2023-05-25T09:23:06.211Z] Platform:      win32
+[debug] [2023-05-25T09:23:06.211Z] Node Version:  v19.6.0
+[debug] [2023-05-25T09:23:06.211Z] Time:          Thu May 25 2023 03:23:06 GMT-0600 (hora estándar central)
+[debug] [2023-05-25T09:23:06.212Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-25T09:23:06.371Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-25T09:23:06.372Z] > authorizing via signed-in user (mon21552@uvg.edu.gt)
+[debug] [2023-05-25T09:23:06.372Z] [iam] checking project hospital-proyecto-fc621 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-25T09:23:06.374Z] > refreshing access token with scopes: []
+[debug] [2023-05-25T09:23:06.379Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-05-25T09:23:06.379Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-25T09:23:06.857Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-05-25T09:23:06.858Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-25T09:23:06.872Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/hospital-proyecto-fc621:testIamPermissions [none]
+[debug] [2023-05-25T09:23:06.872Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/hospital-proyecto-fc621:testIamPermissions x-goog-quota-user=projects/hospital-proyecto-fc621
+[debug] [2023-05-25T09:23:06.873Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hospital-proyecto-fc621:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-25T09:23:07.250Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/hospital-proyecto-fc621:testIamPermissions 200
+[debug] [2023-05-25T09:23:07.251Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hospital-proyecto-fc621:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-25T09:23:07.252Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/hospital-proyecto-fc621 [none]
+[debug] [2023-05-25T09:23:07.822Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/hospital-proyecto-fc621 200
+[debug] [2023-05-25T09:23:07.823Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/hospital-proyecto-fc621 {"projectId":"hospital-proyecto-fc621","projectNumber":"51048709459","displayName":"Hospital proyecto","name":"projects/hospital-proyecto-fc621","resources":{"hostingSite":"hospital-proyecto-fc621"},"state":"ACTIVE","etag":"1_910779f4-c196-4f47-ba8d-daf95b0de4f6"}
+[info] 
+[info] === Deploying to 'hospital-proyecto-fc621'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2023-05-25T09:23:07.837Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/hospital-proyecto-fc621/versions [none]
+[debug] [2023-05-25T09:23:07.837Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/hospital-proyecto-fc621/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-05-25T09:23:08.642Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/hospital-proyecto-fc621/versions 200
+[debug] [2023-05-25T09:23:08.642Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/hospital-proyecto-fc621/versions {"name":"projects/51048709459/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[hospital-proyecto-fc621]: beginning deploy... 
+[info] i  hosting[hospital-proyecto-fc621]: found 12 files in build 
+[debug] [2023-05-25T09:23:08.663Z] [hosting] uploading with 200 concurrency
+[debug] [2023-05-25T09:23:09.083Z] [hosting] hash cache [YnVpbGQ] stored for 12 files
+[debug] [2023-05-25T09:23:09.083Z] [hosting][hash queue][FINAL] {"max":406,"min":3,"avg":45.666666666666664,"active":0,"complete":12,"success":12,"errored":0,"retried":0,"total":12,"elapsed":414}
+[debug] [2023-05-25T09:23:09.084Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/51048709459/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff:populateFiles [none]
+[debug] [2023-05-25T09:23:09.085Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/51048709459/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff:populateFiles {"files":{"/favicon.ico":"eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9","/logo.ico":"c9fe709555cefedf6ae6fc8b661bc695b8395d9384366a16060647a5f49ec467","/manifest.json":"739e4e7cd11c156615981ffaace80ada3b86235aa366776c493dd0bd7587a4fe","/robots.txt":"bfe106a3fb878dc83461c86818bf74fc1bdc7f28538ba613cd3e775516ce8b49","/asset-manifest.json":"3eab8fccd2c4db211a037fea4a5c19d2a476fa436ed9c65b5e39f65255c28738","/index.html":"33fa9ae912c05d3f10a08c761f8a44890bf98b98bc07785698a77a9129a52d2e","/static/css/main.f015f900.css":"78c88c81681e073d57a0e35993736cd3f1cd1d211e0b9842561641389ca8a479","/static/css/main.f015f900.css.map":"d47dfcc4a41bc29524b0bd3f856875d48b415b722cdf3ebd9024672c814c6052","/static/js/main.b061d45b.js.LICENSE.txt":"dc544f46b2db9e42a6cb6d8644566ecaddbf1a7a071cd2671dacdbf3a285c8dc","/static/media/logo.df9c2782737ed01ea2d8.png":"908b1360d47f85a14518054ba9380d010b3ae2e36160c5ea8f1b16858bd1892f","/static/js/main.b061d45b.js":"88850f24245ae70229c1f9962a1a43c045facf0a1a9d9660f567d5cee183c6b5","/static/js/main.b061d45b.js.map":"7ff3641be1b7266ea8d7e9567a2a72a7a7bc1eb114aee99a2a154aae9f0046e6"}}
+[debug] [2023-05-25T09:23:09.249Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/51048709459/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff:populateFiles 200
+[debug] [2023-05-25T09:23:09.249Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/51048709459/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff:populateFiles {"uploadRequiredHashes":["7ff3641be1b7266ea8d7e9567a2a72a7a7bc1eb114aee99a2a154aae9f0046e6","78c88c81681e073d57a0e35993736cd3f1cd1d211e0b9842561641389ca8a479","88850f24245ae70229c1f9962a1a43c045facf0a1a9d9660f567d5cee183c6b5","3eab8fccd2c4db211a037fea4a5c19d2a476fa436ed9c65b5e39f65255c28738","d47dfcc4a41bc29524b0bd3f856875d48b415b722cdf3ebd9024672c814c6052","33fa9ae912c05d3f10a08c761f8a44890bf98b98bc07785698a77a9129a52d2e"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files"}
+[debug] [2023-05-25T09:23:09.252Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/7ff3641be1b7266ea8d7e9567a2a72a7a7bc1eb114aee99a2a154aae9f0046e6 [none]
+[debug] [2023-05-25T09:23:09.252Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/7ff3641be1b7266ea8d7e9567a2a72a7a7bc1eb114aee99a2a154aae9f0046e6 [stream]
+[debug] [2023-05-25T09:23:09.254Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/78c88c81681e073d57a0e35993736cd3f1cd1d211e0b9842561641389ca8a479 [none]
+[debug] [2023-05-25T09:23:09.254Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/78c88c81681e073d57a0e35993736cd3f1cd1d211e0b9842561641389ca8a479 [stream]
+[debug] [2023-05-25T09:23:09.256Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/88850f24245ae70229c1f9962a1a43c045facf0a1a9d9660f567d5cee183c6b5 [none]
+[debug] [2023-05-25T09:23:09.256Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/88850f24245ae70229c1f9962a1a43c045facf0a1a9d9660f567d5cee183c6b5 [stream]
+[debug] [2023-05-25T09:23:09.258Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/3eab8fccd2c4db211a037fea4a5c19d2a476fa436ed9c65b5e39f65255c28738 [none]
+[debug] [2023-05-25T09:23:09.258Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/3eab8fccd2c4db211a037fea4a5c19d2a476fa436ed9c65b5e39f65255c28738 [stream]
+[debug] [2023-05-25T09:23:09.260Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/d47dfcc4a41bc29524b0bd3f856875d48b415b722cdf3ebd9024672c814c6052 [none]
+[debug] [2023-05-25T09:23:09.260Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/d47dfcc4a41bc29524b0bd3f856875d48b415b722cdf3ebd9024672c814c6052 [stream]
+[debug] [2023-05-25T09:23:09.263Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/33fa9ae912c05d3f10a08c761f8a44890bf98b98bc07785698a77a9129a52d2e [none]
+[debug] [2023-05-25T09:23:09.263Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/33fa9ae912c05d3f10a08c761f8a44890bf98b98bc07785698a77a9129a52d2e [stream]
+[debug] [2023-05-25T09:23:09.265Z] [hosting][populate queue][FINAL] {"max":172,"min":172,"avg":172,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":185}
+[debug] [2023-05-25T09:23:09.265Z] [hosting] uploads queued: 6
+[debug] [2023-05-25T09:23:09.956Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/78c88c81681e073d57a0e35993736cd3f1cd1d211e0b9842561641389ca8a479 200
+[debug] [2023-05-25T09:23:09.957Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/78c88c81681e073d57a0e35993736cd3f1cd1d211e0b9842561641389ca8a479 [stream]
+[debug] [2023-05-25T09:23:10.117Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/33fa9ae912c05d3f10a08c761f8a44890bf98b98bc07785698a77a9129a52d2e 200
+[debug] [2023-05-25T09:23:10.117Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/33fa9ae912c05d3f10a08c761f8a44890bf98b98bc07785698a77a9129a52d2e [stream]
+[debug] [2023-05-25T09:23:10.119Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/d47dfcc4a41bc29524b0bd3f856875d48b415b722cdf3ebd9024672c814c6052 200
+[debug] [2023-05-25T09:23:10.119Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/d47dfcc4a41bc29524b0bd3f856875d48b415b722cdf3ebd9024672c814c6052 [stream]
+[debug] [2023-05-25T09:23:10.308Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/3eab8fccd2c4db211a037fea4a5c19d2a476fa436ed9c65b5e39f65255c28738 200
+[debug] [2023-05-25T09:23:10.309Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/3eab8fccd2c4db211a037fea4a5c19d2a476fa436ed9c65b5e39f65255c28738 [stream]
+[debug] [2023-05-25T09:23:10.390Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/88850f24245ae70229c1f9962a1a43c045facf0a1a9d9660f567d5cee183c6b5 200
+[debug] [2023-05-25T09:23:10.390Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/hospital-proyecto-fc621/versions/c4b6da9e90dd1aff/files/88850f24245ae70229c1f9962a1a43c045facf0a1a9d9660f567d5cee183c6b5 [stream]
