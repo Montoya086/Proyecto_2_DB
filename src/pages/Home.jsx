@@ -2,7 +2,6 @@ import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 
 const Home = () => {
   //get user id
@@ -167,7 +166,6 @@ const Home = () => {
           )}
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

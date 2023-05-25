@@ -2,8 +2,6 @@ import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
-
 const ActualizacionDatos = () => {
   const [searchparams] = useSearchParams();
   const [user_id] = useState(searchparams.get('id'));
@@ -355,7 +353,6 @@ const ActualizacionDatos = () => {
         </>
       )}
       </div>
-      <Footer />
     </div>
   )
 }

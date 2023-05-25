@@ -2,7 +2,6 @@ import supabase from "../config/supabaseClient"
 import { useEffect,useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 
 const RegistroPaciente = () => {
   const[searchparams] = useSearchParams();
@@ -141,7 +140,6 @@ const RegistroPaciente = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { useState} from 'react';
 import { createSearchParams, useNavigate } from "react-router-dom";
 import supabase from "../config/supabaseClient";
 import logo from '../images/logo.png';
-import Footer from "./components/Footer"
 
 const Login = () => {
     //variables
@@ -65,7 +64,6 @@ const Login = () => {
                     <button className='btn btn-lg btn-primary btn-block' type='submit'>Login</button>
                 </form>
             </div>
-            <Footer/>
         </div>
     )
   }

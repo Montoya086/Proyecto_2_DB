@@ -60,9 +60,6 @@
   .logo{
     margin-left: 30px;
   }
-  .body{
-    min-height: 700px;
-  }
 }
 @media (min-width: 811px){
   nav a{
@@ -77,9 +74,6 @@
   .hamburger{
     display: none;
     visibility: hidden;
-  }
-  .body{
-    min-height: 900px;
   }
 }
 .hamburger{
@@ -262,11 +256,13 @@ nav h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .login_area{
   margin-top: 10%;
   left: 50%;
+  margin-bottom: 50%;
 }
 
 .form-signin{
