@@ -2,13 +2,13 @@
 <img src="./src/images/logo.png" width="200px" >
 
 ## ¿Qué es?
-[Medic Care]() es una plataforma desarrollada con el fin de poder proporcionar una herramienta util
+[Medic Care](https://hospital-proyecto-fc621.web.app) es una plataforma desarrollada con el fin de poder proporcionar una herramienta util
 a medicos del sector publico y privado para poder llevar el control de los pacientes en uno o más establecimientos.
 Esta herramienta tambien permite a las autoridades de la salud poder llevar un control no modificable de los
 cambios que se realicen dentro de los expedientes.
 
 ## Tecnologías utilizadas
-### Para la realización de [Medic Care](), se utilizaron las siguientes tecnologías para front-end:
+### Para la realización de [Medic Care](https://hospital-proyecto-fc621.web.app), se utilizaron las siguientes tecnologías para front-end:
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png" width="30px"> [React](https://es.react.dev)
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/2048px-HTML5_logo_and_wordmark.svg.png" width="30px"> [HTML](https://developer.mozilla.org/es/docs/Web/HTML)
 - <img src="https://cdn.freebiesupply.com/logos/thumbs/2x/sass-1-logo.png" width="30px"> [Sass](https://sass-lang.com)
@@ -47,4 +47,4 @@ para iniciar un servidor local, o
 npm build
 ```
 para generar una carpeta para producción.
-Tambien puedes acceder a la aplicación haciendo click [aquí]()
+Tambien puedes acceder a la aplicación haciendo click [aquí](https://hospital-proyecto-fc621.web.app)
